@@ -1,4 +1,4 @@
 PRODUCT_PACKAGES += dump_power
 
-PRODUCT_PACKAGES_DEBUG += dump_gsa.sh
+PRODUCT_PACKAGES_ENG += dump_gsa.sh
 
