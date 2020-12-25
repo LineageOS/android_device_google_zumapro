@@ -22,5 +22,9 @@ include hardware/google/pixel/lineage_health/device.mk
 PRODUCT_VENDOR_LINKER_CONFIG_FRAGMENTS += \
     device/google/zumapro/linker.config.json
 
+# Parts
+PRODUCT_PACKAGES += \
+    GoogleParts
+
 # Touch
 include hardware/google/pixel/touch/device.mk
