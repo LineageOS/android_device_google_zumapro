@@ -4,6 +4,11 @@
 # SPDX-License-Identifier: Apache-2.0
 #
 
+# Manifests
+DEVICE_MANIFEST_FILE += \
+    device/google/zumapro/android.hardware.security.rkp-service.citadel.xml \
+    device/google/zumapro/manifest_radio_ds.xml
+
 # Partitions
 AB_OTA_PARTITIONS += \
     vendor \
