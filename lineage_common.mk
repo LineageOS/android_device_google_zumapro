@@ -7,6 +7,10 @@
 # Overlays
 DEVICE_PACKAGE_OVERLAYS += device/google/zumapro/overlay-lineage
 
+# AiAi Config
+PRODUCT_COPY_FILES += \
+    device/google/zumapro/allowlist_com.google.android.as.xml:$(TARGET_COPY_OUT_PRODUCT)/etc/sysconfig/allowlist_com.google.android.as.xml
+
 # Camera
 PRODUCT_PRODUCT_PROPERTIES += \
     ro.vendor.camera.extensions.package=com.google.android.apps.camera.services \
