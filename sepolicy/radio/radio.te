@@ -7,3 +7,4 @@ allow radio radio_vendor_data_file:file create_file_perms;
 allow radio vendor_ims_app:udp_socket { getattr read write setopt shutdown };
 allow radio aoc_device:chr_file rw_file_perms;
 allow radio scheduling_policy_service:service_manager find;
+allow radio hal_exynos_rild_hwservice:hwservice_manager find;
