@@ -14,6 +14,7 @@
 /vendor/bin/hw/android\.hardware\.secure_element-service.uicc               u:object_r:hal_secure_element_uicc_exec:s0
 /vendor/bin/hw/android\.hardware\.composer\.hwc3-service\.pixel             u:object_r:hal_graphics_composer_default_exec:s0
 /vendor/bin/hw/google\.hardware\.media\.c2@2\.0-service                     u:object_r:mediacodec_google_exec:s0
+/vendor/bin/hw/vendor\.dolby\.media\.c2@1\.0-service                        u:object_r:mediacodec_exec:s0
 /vendor/bin/dump/dump_gsa\.sh                                               u:object_r:dump_gsa_exec:s0
 /vendor/bin/tcpdump_logger                                                  u:object_r:tcpdump_logger_exec:s0
 /vendor/bin/storageproxyd                                                   u:object_r:tee_exec:s0
