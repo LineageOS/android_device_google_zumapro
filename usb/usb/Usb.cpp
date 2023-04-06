@@ -1174,12 +1174,35 @@ void queryUsbDataSession(android::hardware::usb::Usb *usb,
         warnings.end());
 }
 
+Status getUsbDataEnabledHelper(android::hardware::usb::Usb *usb) {
+    string enabled;
+
+    if (!ReadFileToString(USB_DATA_PATH, &enabled)) {
+        ALOGE("Failed to open usb_data_enabled");
+        return Status::ERROR;
+    }
+
+    enabled = Trim(enabled);
+    if (enabled == "enabled") {
+        usb->mUsbDataEnabled = true;
+    } else if (enabled == "disabled") {
+        usb->mUsbDataEnabled = false;
+    } else {
+        ALOGE("Unknown usb_data_enabled state '%s'; not updating", enabled.c_str());
+        return Status::ERROR;
+    }
+
+    ALOGI("mUsbDataEnabled:%d", usb->mUsbDataEnabled ? 1 : 0);
+    return Status::SUCCESS;
+}
+
 void queryVersionHelper(android::hardware::usb::Usb *usb,
                         std::vector<PortStatus> *currentPortStatus) {
     Status status;
     string displayPortUsbPath;
 
     pthread_mutex_lock(&usb->mLock);
+    getUsbDataEnabledHelper(usb);
     status = getPortStatusHelper(usb, currentPortStatus);
     queryMoistureDetectionStatus(usb, currentPortStatus);
     queryPowerTransferStatus(usb, currentPortStatus);
