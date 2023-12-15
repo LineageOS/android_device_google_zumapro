@@ -1,8 +1,5 @@
 # PixelDisplayService
 user=_app seinfo=platform name=com.android.pixeldisplayservice domain=pixeldisplayservice_app type=app_data_file levelFrom=all
 
-# SystemUI
-user=_app seinfo=platform name=com.android.systemui domain=systemui_app type=app_data_file levelFrom=all
-user=_app seinfo=platform name=com.android.systemui:* domain=systemui_app type=app_data_file levelFrom=all
 # PixelNtnService
 user=system seinfo=platform name=com.google.android.satellite domain=pixelntnservice_app type=app_data_file levelFrom=all
