@@ -1,0 +1,1 @@
+type hal_aam_service, service_manager_type, hal_service_type;

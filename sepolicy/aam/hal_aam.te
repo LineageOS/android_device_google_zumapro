@@ -1,0 +1,6 @@
+type hal_aam, domain;
+type hal_aam_exec, exec_type, vendor_file_type, file_type;
+
+init_daemon_domain(hal_aam)
+add_service(hal_aam, hal_aam_service)
+binder_call(hal_aam, servicemanager);
