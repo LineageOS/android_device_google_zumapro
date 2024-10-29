@@ -16,6 +16,24 @@
       "message": "Move these to gs-common?",
       "revId": "18b6a404977641ab70a68693459e76950c4892fd",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d3d7df3e_f2ffcbdd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4550
+      },
+      "writtenOn": "2024-10-29T18:06:03Z",
+      "side": 1,
+      "message": "It\u0027s easier to just not put anything in gs-common, as some pixels will be dropped in the future and might need different changes, which will require moving it back to individual devices.",
+      "parentUuid": "0eda02d6_d4fd97f6",
+      "revId": "18b6a404977641ab70a68693459e76950c4892fd",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
     }
   ]
 }
