@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "428dfa5b_8e86c9cd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 29415
+      },
+      "writtenOn": "2024-10-29T17:17:51Z",
+      "side": 1,
+      "message": "Should CarrierSettings also be used as an APN source?",
+      "revId": "fad924a57f3cac819a3e3ade04ad0c5b8887c8ec",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    }
+  ]
+}
