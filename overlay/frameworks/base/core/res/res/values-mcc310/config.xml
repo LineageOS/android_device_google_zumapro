@@ -23,7 +23,7 @@
     <bool name="config_safe_media_volume_enabled">true</bool>
 
     <!-- Defines the actions shown in advanced reboot submenu -->
-    <string-array name="config_restartActionsList">
+    <string-array translatable="false" name="config_restartActionsList">
         <item>restart</item>
         <item>restart_recovery</item>
         <item>restart_fastboot</item>

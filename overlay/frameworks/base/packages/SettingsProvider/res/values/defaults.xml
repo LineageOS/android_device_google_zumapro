@@ -18,6 +18,6 @@
 -->
 <resources>
     <!-- disable bluetooth and wifi during satellite -->
-    <string name="def_satellite_mode_radios">bluetooth,wifi</string>
+    <string translatable="false" name="def_satellite_mode_radios">bluetooth,wifi</string>
 </resources>
 
