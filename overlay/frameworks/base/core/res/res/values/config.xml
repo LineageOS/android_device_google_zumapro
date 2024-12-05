@@ -136,8 +136,8 @@
     <bool translatable="false" name="config_cbrs_supported">true</bool>
 
     <!-- IWLAN-->
-    <string name="config_wlan_data_service_package">com.google.android.iwlan</string>
-    <string name="config_wlan_network_service_package">com.google.android.iwlan</string>
+    <string translatable="false" name="config_wlan_data_service_package">com.google.android.iwlan</string>
+    <string translatable="false" name="config_wlan_network_service_package">com.google.android.iwlan</string>
     <bool name="config_wlan_data_service_conn_persistence_on_restart">false</bool>
 
     <!-- Boolean indicating USSD over IMS is allowed.
@@ -231,7 +231,7 @@
      </string-array>
 
     <!-- Auto-brightness sensor type string -->
-    <string name="config_displayLightSensorType">"com.google.sensor.auto_brightness"</string>
+    <string translatable="false" name="config_displayLightSensorType">"com.google.sensor.auto_brightness"</string>
 
     <!-- Default list of files pinned by the Pinner Service -->
     <string-array translatable="false" name="config_defaultPinnerServiceFiles">
@@ -311,7 +311,7 @@
     <fraction name="config_prescaleAbsoluteVolume_index3">100%</fraction>
 
     <!-- Telephony satellite service package name to bind to by default. -->
-    <string name="config_satellite_service_package">com.google.android.satellite</string>
+    <string translatable="false" name="config_satellite_service_package">com.google.android.satellite</string>
 
     <!-- The time duration in millis after which Telephony will stop waiting for the response of the
          satellite enable request from modem, and send failure response to the client that has
@@ -320,10 +320,10 @@
     <integer name="config_wait_for_satellite_enabling_response_timeout_millis">240000</integer>
 
     <!-- Telephony pointing UI package name to be launched. -->
-    <string name="config_pointing_ui_package">com.google.android.apps.scone</string>
+    <string translatable="false" name="config_pointing_ui_package">com.google.android.apps.scone</string>
 
     <!-- Telephony pointing UI class name to be launched. -->
-    <string name="config_pointing_ui_class">com.google.android.apps.scone.satellite.pointingui.ui.PointingUiActivity</string>
+    <string translatable="false" name="config_pointing_ui_class">com.google.android.apps.scone.satellite.pointingui.ui.PointingUiActivity</string>
 
     <!-- Boolean indicating if restoring network selection should be skipped -->
     <!-- The restoring is handled by modem if it is true -->
@@ -472,14 +472,14 @@
 
     <!-- The identifier of the satellite's SIM profile. The identifier is composed of MCC and MNC
          of the satellite PLMN with the format "mccmnc". -->
-    <string name="config_satellite_sim_plmn_identifier">90198</string>
+    <string translatable="false" name="config_satellite_sim_plmn_identifier">90198</string>
 
     <!-- The identifier for the satellite's SIM profile. The identifier is the service provider name
          (spn) from the profile metadata. -->
-    <string name="config_satellite_sim_spn_identifier">Skylo</string>
+    <string translatable="false" name="config_satellite_sim_spn_identifier">Skylo</string>
 
     <!-- Telephony satellite gateway service package name to bind to by default. -->
-    <string name="config_satellite_gateway_service_package">com.google.android.apps.stargate</string>
+    <string translatable="false" name="config_satellite_gateway_service_package">com.google.android.apps.stargate</string>
 
     <!-- List of country codes where oem-enabled satellite services are either allowed or disallowed
          by the device. Each country code is a lowercase 2 character ISO-3166-1 alpha-2. -->
@@ -489,7 +489,7 @@
 
     <!-- The file storing S2-cell-based satellite access restriction of the countries defined by
          config_oem_enabled_satellite_countries. -->
-    <string name="config_oem_enabled_satellite_s2cell_file">/vendor/etc/telephony/sats2.dat</string>
+    <string translatable="false" name="config_oem_enabled_satellite_s2cell_file">/vendor/etc/telephony/sats2.dat</string>
 
     <!-- The time duration in millis after which cellular scanning will be enabled and satellite
          will move to IDLE state. This timeout duration is used for satellite with NB IOT radio
@@ -512,8 +512,8 @@
     <integer name="config_datagram_wait_for_connected_state_timeout_millis">180000</integer>
 
     <!-- The package name of the app to handle oem-enabled satellite SOS messaging. -->
-    <string name="config_oem_enabled_satellite_sos_handover_app">com.google.android.apps.stargate;com.google.android.apps.stargate.questionnaire.QuestionnaireHomeActivity</string>
+    <string translatable="false" name="config_oem_enabled_satellite_sos_handover_app">com.google.android.apps.stargate;com.google.android.apps.stargate.questionnaire.QuestionnaireHomeActivity</string>
 
     <!-- The intent action to handle oem-enabled satellite SOS messaging. -->
-    <string name="config_satellite_emergency_handover_intent_action">com.google.android.apps.stargate.ACTION_ESOS_QUESTIONNAIRE</string>
+    <string translatable="false" name="config_satellite_emergency_handover_intent_action">com.google.android.apps.stargate.ACTION_ESOS_QUESTIONNAIRE</string>
 </resources>
