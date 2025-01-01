@@ -5,7 +5,8 @@
 #
 
 # Overlays
-DEVICE_PACKAGE_OVERLAYS += device/google/zumapro/overlay-lineage
+DEVICE_PACKAGE_OVERLAYS += device/google/zumapro/overlay-lineage/vendor
+PRODUCT_PACKAGE_OVERLAYS += device/google/zumapro/overlay-lineage/product
 
 # AiAi Config
 PRODUCT_COPY_FILES += \
