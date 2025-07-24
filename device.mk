@@ -77,8 +77,6 @@ PRODUCT_SOONG_NAMESPACES += \
 	device/google/zumapro \
 	device/google/zumapro/powerstats
 
-LOCAL_KERNEL := $(TARGET_KERNEL_DIR)/Image.lz4
-
 # Set the environment variable to switch the Keymint HAL service to Rust
 TRUSTY_KEYMINT_IMPL := rust
 
@@ -402,7 +400,6 @@ PRODUCT_ENFORCE_PRODUCT_PARTITION_INTERFACE := true
 
 # Init files
 PRODUCT_COPY_FILES += \
-	$(LOCAL_KERNEL):kernel \
 	device/google/zumapro/conf/init.zumapro.usb.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/hw/init.zumapro.usb.rc \
 	device/google/zumapro/conf/ueventd.zumapro.rc:$(TARGET_COPY_OUT_VENDOR)/etc/ueventd.rc
 
