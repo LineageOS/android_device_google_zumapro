@@ -5,7 +5,6 @@
 #
 
 # Manifests
-DEVICE_FRAMEWORK_COMPATIBILITY_MATRIX_FILE += vendor/lineage/config/device_framework_matrix.xml
 DEVICE_MANIFEST_FILE += \
     device/google/zumapro/android.hardware.security.rkp-service.citadel.xml
 ifeq ($(PRODUCT_SHIPPING_API_LEVEL),35)
