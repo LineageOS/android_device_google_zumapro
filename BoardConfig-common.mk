@@ -406,7 +406,7 @@ BOARD_VENDOR_KERNEL_RAMDISK_KERNEL_MODULES_LOAD_EXTRA = $(foreach k,$(BOARD_PREB
 # Kernel modules that are listed in vendor_kernel_boot.modules.load
 BOARD_VENDOR_KERNEL_RAMDISK_KERNEL_MODULES_LOAD_FILE := $(strip $(shell cat $(KERNEL_MODULE_DIR)/vendor_kernel_boot.modules.load))
 ifndef BOARD_VENDOR_KERNEL_RAMDISK_KERNEL_MODULES_LOAD_FILE
-$(error vendor_kernel_boot.modules.load not found or empty)
+$(warning vendor_kernel_boot.modules.load not found or empty. Please run build_kernel and breakfast your device again.)
 endif
 BOARD_VENDOR_KERNEL_RAMDISK_KERNEL_MODULES_LOAD := $(BOARD_VENDOR_KERNEL_RAMDISK_KERNEL_MODULES_LOAD_EXTRA)
 BOARD_VENDOR_KERNEL_RAMDISK_KERNEL_MODULES_LOAD += $(BOARD_VENDOR_KERNEL_RAMDISK_KERNEL_MODULES_LOAD_FILE)
@@ -415,13 +415,13 @@ BOARD_VENDOR_KERNEL_RAMDISK_KERNEL_MODULES += $(addprefix $(KERNEL_MODULE_DIR)/,
 
 BOARD_VENDOR_KERNEL_MODULES_LOAD := $(strip $(shell cat $(KERNEL_MODULE_DIR)/vendor_dlkm.modules.load))
 ifndef BOARD_VENDOR_KERNEL_MODULES_LOAD
-$(error vendor_dlkm.modules.load not found or empty)
+$(warning vendor_dlkm.modules.load not found or empty. Please run build_kernel and breakfast your device again.)
 endif
 BOARD_VENDOR_KERNEL_MODULES := $(addprefix $(KERNEL_MODULE_DIR)/, $(notdir $(BOARD_VENDOR_KERNEL_MODULES_LOAD)))
 
 BOARD_SYSTEM_KERNEL_MODULES_LOAD := $(strip $(shell cat $(KERNEL_MODULE_DIR)/system_dlkm.modules.load))
 ifndef BOARD_SYSTEM_KERNEL_MODULES_LOAD
-$(error system_dlkm.modules.load not found or empty)
+$(warning system_dlkm.modules.load not found or empty. Please run build_kernel and breakfast your device again.)
 endif
 BOARD_SYSTEM_KERNEL_MODULES := $(addprefix $(KERNEL_MODULE_DIR)/, $(notdir $(BOARD_SYSTEM_KERNEL_MODULES_LOAD)))
 
