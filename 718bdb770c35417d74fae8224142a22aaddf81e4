@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fa5135d5_31bf4b39",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4550
+      },
+      "writtenOn": "2025-10-23T10:27:37Z",
+      "side": 1,
+      "message": "Alternative: sync https://github.com/mikeNG/android_device_google_caimito-kernels",
+      "revId": "718bdb770c35417d74fae8224142a22aaddf81e4",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    }
+  ]
+}
