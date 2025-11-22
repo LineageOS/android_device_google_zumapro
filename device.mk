@@ -50,7 +50,6 @@ include device/google/gs-common/16kb/16kb.mk
 include device/google/zumapro/dumpstate/item.mk
 
 TARGET_BOARD_PLATFORM := zumapro
-ALLOW_MISSING_DEPENDENCIES := true
 
 AB_OTA_POSTINSTALL_CONFIG += \
 	RUN_POSTINSTALL_system=true \
@@ -63,12 +62,6 @@ VENDOR_SECURITY_PATCH := 2025-08-05
 
 # Set boot SPL
 BOOT_SECURITY_PATCH := 2025-08-05
-
-# TODO(b/207450311): Remove this flag once implemented
-USE_PIXEL_GRALLOC := false
-ifeq ($(USE_PIXEL_GRALLOC),true)
-	PRODUCT_SOONG_NAMESPACES += hardware/google/gchips/GrallocHAL
-endif
 
 PRODUCT_SOONG_NAMESPACES += \
 	hardware/google/av \
@@ -89,8 +82,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
 	ro.telephony.default_network=27 \
 	persist.vendor.ril.db_ecc.use.iccid_to_plmn=1 \
 	persist.vendor.ril.db_ecc.id.type=5
-	#rild.libpath=/system/lib64/libsec-ril.so \
-	#rild.libargs=-d /dev/umts_ipc0
 
 # SIT-RIL Logging setting
 PRODUCT_PROPERTY_OVERRIDES += \
@@ -171,31 +162,11 @@ PRODUCT_SYSTEM_PROPERTIES += \
 PRODUCT_PROPERTY_OVERRIDES += \
 	persist.sys.hdcp_checking=drm-only
 
-USE_LASSEN_OEMHOOK := true
-
 # Pixel Logger
 include hardware/google/pixel/PixelLogger/PixelLogger.mk
 
-ifneq ($(BOARD_WITHOUT_RADIO),true)
-# The "power-anomaly-sitril" is added into PRODUCT_SOONG_NAMESPACES when
-# $(USE_LASSEN_OEMHOOK) is true and $(BOARD_WITHOUT_RADIO) is not true.
-$(call soong_config_set,sitril,use_lassen_oemhook_with_radio,true)
-
 # modem_ml_svc_sit daemon
 PRODUCT_PACKAGES += modem_ml_svc_sit
-
-# TODO: b/350624523 - Add back modem ML TFLite service after it is ready.
-# ifeq (,$(filter aosp_%,$(TARGET_PRODUCT)))
-# # Modem ML TFLite service.
-# PRODUCT_PACKAGES += modemml-tflite-service \
-# 	libtensorflowlite_jni
-
-# # Allow TFLite service modules to be installed to the system partition
-# PRODUCT_ARTIFACT_PATH_REQUIREMENT_ALLOWED_LIST += \
-# 	system/lib64/libtensorflowlite_jni.so
-
-# PRODUCT_SYSTEM_SERVER_JARS += system_ext:modemml-tflite-service
-# endif
 
 # modem ML models configs
 PRODUCT_COPY_FILES += \
@@ -222,57 +193,11 @@ PRODUCT_PACKAGES += \
 PRODUCT_PROPERTY_OVERRIDES += \
 	persist.vendor.modem.extensive_logging_enabled=false
 
-# Use Lassen specifc Shared Modem Platform
-SHARED_MODEM_PLATFORM_VENDOR := lassen
-
-else # ifneq ($(BOARD_WITHOUT_RADIO),true)
-
-# Pixel Logger
-BOARD_SEPOLICY_DIRS += hardware/google/pixel-sepolicy/logger_app
-
-endif # ifneq ($(BOARD_WITHOUT_RADIO),true)
-
 # Shared Modem Platform
 include device/google/gs-common/modem/modem_svc_sit/shared_modem_platform.mk
 
-# Use for GRIL
-USES_LASSEN_MODEM := true
-ifneq ($(BOARD_WITHOUT_RADIO),true)
-$(call soong_config_set_bool,grilservice,use_google_qns,true)
-endif
-
-ifeq ($(USES_GOOGLE_DIALER_CARRIER_SETTINGS),true)
-USE_GOOGLE_DIALER := true
-USE_GOOGLE_CARRIER_SETTINGS := true
-PRODUCT_PROPERTY_OVERRIDES += \
-	ro.vendor.uses_google_dialer_carrier_settings=1
-endif
-
-ifeq ($(USES_GOOGLE_PREBUILT_MODEM_SVC),true)
-USE_GOOGLE_PREBUILT_MODEM_SVC := true
-endif
-
-# Audio client implementation for RIL
-USES_GAUDIO := true
-
-# ######################
-# GRAPHICS - GPU (begin)
-
-# Must match BOARD_USES_SWIFTSHADER in BoardConfig.mk
-USE_SWIFTSHADER ?= false
-
 # HWUI
-ifeq ($(USE_SWIFTSHADER),true)
-$(warning USE_SWIFTSHADER set to current target)
-TARGET_USES_VULKAN = false
-else
 TARGET_USES_VULKAN = true
-endif
-
-$(call soong_config_set,pixel_mali,soc,$(TARGET_BOARD_PLATFORM))
-# TODO (b/297408842): The gralloc is being open-sourced, and we cannot pass
-# "zumapro" as SOC to build it. Pass "zuma" as SOC for now.
-$(call soong_config_set,arm_gralloc,soc,zuma)
 
 include device/google/gs-common/gpu/gpu.mk
 
@@ -292,31 +217,13 @@ PRODUCT_PACKAGES += \
 	mali_icd__customer_pixel_opencl-icd_ARM32.icd
 endif
 
-ifeq ($(USE_SWIFTSHADER),true)
-$(warning USE_SWIFTSHADER set to current target)
-PRODUCT_PACKAGES += \
-	libEGL_angle \
-	libGLESv1_CM_angle \
-	libGLESv2_angle \
-	vulkan.pastel
-
-PRODUCT_VENDOR_PROPERTIES += \
-	ro.hardware.egl=angle \
-	ro.hardware.vulkan=pastel
-else
 PRODUCT_VENDOR_PROPERTIES += \
 	ro.hardware.egl=mali \
 	ro.hardware.vulkan=mali
-endif
 
-# SurfaceFlinger / RenderEngine
-ifeq ($(TARGET_USES_VULKAN),true)
 # b/293371537 Opt in to RE-Graphite's aconfig-based preview rollout
 PRODUCT_VENDOR_PROPERTIES += debug.renderengine.graphite_preview_optin=true
-else
-$(warning TARGET_USES_VULKAN == false, cannot opt in to RE-Graphite rollout in SurfaceFlinger)
-PRODUCT_VENDOR_PROPERTIES += debug.renderengine.graphite_preview_optin=false
-endif
+
 # b/295257834 Add HDR shaders to SurfaceFlinger's pre-warming cache
 PRODUCT_VENDOR_PROPERTIES += ro.surface_flinger.prime_shader_cache.ultrahdr=1
 
@@ -336,8 +243,6 @@ PRODUCT_COPY_FILES += \
 	frameworks/native/data/etc/android.software.vulkan.deqp.level-2025-03-01.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.software.vulkan.deqp.level.xml \
 	frameworks/native/data/etc/android.software.opengles.deqp.level-2025-03-01.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.software.opengles.deqp.level.xml
 
-#endif
-
 # Configure EGL blobcache
 PRODUCT_VENDOR_PROPERTIES += \
 	ro.egl.blobcache.multifile=true \
@@ -346,9 +251,6 @@ PRODUCT_VENDOR_PROPERTIES += \
 PRODUCT_VENDOR_PROPERTIES += \
 	ro.opengles.version=196610 \
 	graphics.gpu.profiler.support=true \
-
-# GRAPHICS - GPU (end)
-# ####################
 
 PRODUCT_SHIPPING_API_LEVEL := $(SHIPPING_API_LEVEL)
 
@@ -371,7 +273,6 @@ DEVICE_MATRIX_FILE := \
 	device/google/zumapro/compatibility_matrix.xml
 endif
 
-BOARD_USE_CODEC2_AIDL := V1
 ifneq (,$(filter aosp_%,$(TARGET_PRODUCT)))
 ifeq ($(PRODUCT_SHIPPING_API_LEVEL),35)
 DEVICE_MANIFEST_FILE += \
@@ -475,9 +376,6 @@ include device/google/gs-common/chre/hal.mk
 PRODUCT_COPY_FILES += \
 	frameworks/native/data/etc/android.hardware.context_hub.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.context_hub.xml
 
-## Enable the CHRE Daemon
-CHRE_USF_DAEMON_ENABLED := false
-
 # Filesystem management tools
 PRODUCT_PACKAGES += \
 	linker.vendor_ramdisk \
@@ -513,16 +411,9 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PACKAGES += \
 	tlrpmb
 
-# Touch firmware
-#PRODUCT_COPY_FILES += \
-	device/google/zumapro/firmware/touch/s6sy761.bin:$(TARGET_COPY_OUT_VENDOR)/firmware/s6sy761.fw
 # Touch
 PRODUCT_COPY_FILES += \
 	frameworks/native/data/etc/android.hardware.touchscreen.multitouch.jazzhand.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.touchscreen.multitouch.jazzhand.xml
-
-ifneq (,$(filter ripcurrentpro, $(TARGET_PRODUCT)))
-	include device/google/gs-common/touch/gti/gti.mk
-endif
 
 # Sensors
 PRODUCT_COPY_FILES += \
@@ -533,15 +424,11 @@ PRODUCT_COPY_FILES += \
 	frameworks/native/data/etc/android.hardware.sensor.light.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.sensor.light.xml\
 	frameworks/native/data/etc/android.hardware.sensor.stepcounter.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.sensor.stepcounter.xml \
 	frameworks/native/data/etc/android.hardware.sensor.stepdetector.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.sensor.stepdetector.xml
-ifneq ($(DISABLE_SENSOR_BARO_HIFI),true)
 PRODUCT_COPY_FILES += \
 	frameworks/native/data/etc/android.hardware.sensor.barometer.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.sensor.barometer.xml \
 	frameworks/native/data/etc/android.hardware.sensor.hifi_sensors.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.sensor.hifi_sensors.xml
-endif
-ifneq ($(DISABLE_SENSOR_PROX),true)
 PRODUCT_COPY_FILES += \
 	frameworks/native/data/etc/android.hardware.sensor.proximity.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.sensor.proximity.xml
-endif
 
 # Add sensor HAL AIDL product packages
 PRODUCT_PACKAGES += android.hardware.sensors-service.multihal
@@ -552,11 +439,7 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
 	android.hardware.usb.gadget-service
 
-ifneq (,$(filter ripcurrentpro, $(TARGET_PRODUCT)))
-PRODUCT_PACKAGES += usb_service_init_rc_i2c11
-else
 PRODUCT_PACKAGES += usb_service_init_rc_i2c6
-endif
 
 # MIDI feature
 PRODUCT_COPY_FILES += \
@@ -582,10 +465,6 @@ PRODUCT_PACKAGES += \
 # Audio HALs
 #
 
-# Audio Configurations
-#USE_LEGACY_LOCAL_AUDIO_HAL := false
-#USE_XML_AUDIO_POLICY_CONF := 1
-
 # Enable AAudio MMAP/NOIRQ data path.
 PRODUCT_PROPERTY_OVERRIDES += aaudio.mmap_policy=2
 PRODUCT_PROPERTY_OVERRIDES += aaudio.mmap_exclusive_policy=2
@@ -593,28 +472,6 @@ PRODUCT_PROPERTY_OVERRIDES += aaudio.hw_burst_min_usec=2000
 
 # Set util_clamp_min for s/w spatializer
 PRODUCT_PROPERTY_OVERRIDES += audio.spatializer.effect.util_clamp_min=300
-
-# Calliope firmware overwrite
-#PRODUCT_COPY_FILES += \
-	device/google/zumapro/firmware/calliope_dram.bin:$(TARGET_COPY_OUT_VENDOR)/firmware/calliope_dram.bin \
-	device/google/zumapro/firmware/calliope_sram.bin:$(TARGET_COPY_OUT_VENDOR)/firmware/calliope_sram.bin \
-	device/google/zumapro/firmware/calliope_dram_2.bin:$(TARGET_COPY_OUT_VENDOR)/firmware/calliope_dram_2.bin \
-	device/google/zumapro/firmware/calliope_sram_2.bin:$(TARGET_COPY_OUT_VENDOR)/firmware/calliope_sram_2.bin \
-	device/google/zumapro/firmware/calliope2.dt:$(TARGET_COPY_OUT_VENDOR)/firmware/calliope2.dt \
-
-# Cannot reference variables defined in BoardConfig.mk, uncomment this if
-# BOARD_USE_OFFLOAD_AUDIO and BOARD_USE_OFFLOAD_EFFECT are true
-## AudioEffectHAL library
-#PRODUCT_PACKAGES += \
-#	libexynospostprocbundle
-
-# Cannot reference variables defined in BoardConfig.mk, uncomment this if
-# BOARD_USE_SOUNDTRIGGER_HAL is true
-#PRODUCT_PACKAGES += \
-#	sound_trigger.primary.maran9820
-
-# A-Box Service Daemon
-#PRODUCT_PACKAGES += main_abox
 
 # Libs
 PRODUCT_PACKAGES += \
@@ -636,14 +493,6 @@ PRODUCT_PACKAGES += \
 include device/google/zumapro/widevine/device.mk
 PRODUCT_PACKAGES += \
 	liboemcrypto \
-
-RIPCURRENTPRO_PRODUCT := %ripcurrentpro
-ifneq (,$(filter $(RIPCURRENTPRO_PRODUCT), $(TARGET_PRODUCT)))
-        LOCAL_TARGET_PRODUCT := ripcurrentpro
-else
-        # WAR: continue defaulting to slider build on zumapro
-        LOCAL_TARGET_PRODUCT := slider
-endif
 
 include device/google/gs-common/camera/lyric.mk
 
@@ -678,16 +527,7 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/virtual_ab_ota/launch_with_ven
 $(call inherit-product, $(SRC_TARGET_DIR)/product/generic_ramdisk.mk)
 
 # Titan-M
-ifeq (,$(filter true, $(BOARD_WITHOUT_DTLS)))
 include device/google/gs-common/dauntless/gsc.mk
-endif
-
-# Copy Camera HFD Setfiles
-#PRODUCT_COPY_FILES += \
-	device/google/zumapro/firmware/camera/libhfd/default_configuration.hfd.cfg.json:$(TARGET_COPY_OUT_VENDOR)/firmware/default_configuration.hfd.cfg.json \
-	device/google/zumapro/firmware/camera/libhfd/pp_cfg.json:$(TARGET_COPY_OUT_VENDOR)/firmware/pp_cfg.json \
-	device/google/zumapro/firmware/camera/libhfd/tracker_cfg.json:$(TARGET_COPY_OUT_VENDOR)/firmware/tracker_cfg.json \
-	device/google/zumapro/firmware/camera/libhfd/WithLightFixNoBN.SDNNmodel:$(TARGET_COPY_OUT_VENDOR)/firmware/WithLightFixNoBN.SDNNmodel
 
 # WiFi
 PRODUCT_COPY_FILES += \
@@ -698,10 +538,8 @@ PRODUCT_COPY_FILES += \
 	frameworks/native/data/etc/android.hardware.wifi.rtt.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.wifi.rtt.xml
 
 # Bluetooth channel sounding
-ifneq (,$(RELEASE_RANGING_STACK))
 PRODUCT_COPY_FILES += \
         frameworks/native/data/etc/android.hardware.bluetooth_le.channel_sounding.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.bluetooth_le.channel_sounding.xml
-endif
 
 PRODUCT_COPY_FILES += \
 	frameworks/native/data/etc/android.hardware.usb.host.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.usb.host.xml \
@@ -713,19 +551,8 @@ PRODUCT_COPY_FILES += \
 	frameworks/native/data/etc/android.hardware.camera.full.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.camera.full.xml\
 	frameworks/native/data/etc/android.hardware.camera.raw.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.camera.raw.xml\
 
-ifneq ($(DISABLE_CAMERA_FS),true)
 PRODUCT_COPY_FILES += \
 	frameworks/native/data/etc/android.hardware.camera.flash-autofocus.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.camera.flash-autofocus.xml
-else
-PRODUCT_COPY_FILES += \
-	frameworks/native/data/etc/android.hardware.camera.autofocus.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.camera.autofocus.xml
-endif
-
-#PRODUCT_COPY_FILES += \
-	frameworks/native/data/etc/handheld_core_hardware.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/handheld_core_hardware.xml \
-	frameworks/native/data/etc/android.hardware.wifi.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.wifi.xml \
-	frameworks/native/data/etc/android.hardware.wifi.direct.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.wifi.direct.xml \
-	frameworks/native/data/etc/android.hardware.wifi.passpoint.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.wifi.passpoint.xml \
 
 PRODUCT_COPY_FILES += \
 	frameworks/native/data/etc/android.hardware.audio.low_latency.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.audio.low_latency.xml \
@@ -787,12 +614,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += vendor.hwc.dpp.downscale=4
 
 # Cannot reference variables defined in BoardConfig.mk, uncomment this if
-# BOARD_USES_EXYNOS_DSS_FEATURE is true
-## set the dss enable status setup
-#PRODUCT_PROPERTY_OVERRIDES += \
-#        ro.exynos.dss=1
-
-# Cannot reference variables defined in BoardConfig.mk, uncomment this if
 # BOARD_USES_EXYNOS_AFBC_FEATURE is true
 # set the dss enable status setup
 PRODUCT_PROPERTY_OVERRIDES += \
@@ -809,10 +630,6 @@ PRODUCT_PACKAGES += wpa_supplicant
 PRODUCT_PACKAGES += wpa_supplicant.conf
 
 WIFI_PRIV_CMD_UPDATE_MBO_CELL_STATUS := enabled
-
-####################################
-## VIDEO
-####################################
 
 # Video
 # 1. Codec 2.0
@@ -833,13 +650,8 @@ PRODUCT_PROPERTY_OVERRIDES += \
        debug.stagefright.ccodec_delayed_params=1 \
        ro.vendor.gpu.dataspace=1
 
-ifneq ($(BOARD_USE_CODEC2_AIDL), )
 PRODUCT_PROPERTY_OVERRIDES += \
         debug.stagefright.c2-poolmask=1507328
-else
-PRODUCT_PROPERTY_OVERRIDES += \
-        debug.stagefright.c2-poolmask=458752
-endif
 
 # Create input surface on the framework side
 PRODUCT_PROPERTY_OVERRIDES += \
@@ -851,15 +663,6 @@ PRODUCT_PROPERTY_OVERRIDES += media.c2.hal.selection=aidl
 PRODUCT_COPY_FILES += \
 	device/google/zumapro/media_codecs.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs.xml \
 	device/google/zumapro/media_codecs_performance.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs_performance.xml
-####################################
-
-# Telephony
-#PRODUCT_COPY_FILES += \
-	frameworks/av/media/libstagefright/data/media_codecs_google_telephony.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs_google_telephony.xml
-
-# CBD (CP booting deamon)
-CBD_USE_V2 := true
-CBD_PROTOCOL_SIT := true
 
 # setup dalvik vm configs.
 $(call inherit-product, frameworks/native/build/phone-xhdpi-6144-dalvik-heap.mk)
@@ -870,11 +673,6 @@ PRODUCT_TAGS += dalvik.gc.type-precise
 PRODUCT_PACKAGES += \
 		libexynosvision
 
-ifeq ($(TARGET_USES_CL_KERNEL),true)
-PRODUCT_PACKAGES += \
-	libopenvx-opencl
-endif
-
 # Trusty (KM, GK, Storage)
 $(call inherit-product, system/core/trusty/trusty-storage.mk)
 $(call inherit-product, system/core/trusty/trusty-base.mk)
@@ -883,7 +681,6 @@ $(call inherit-product, system/core/trusty/trusty-base.mk)
 PRODUCT_PACKAGES += \
 	trusty_metricsd
 
-$(call soong_config_set,google_displaycolor,displaycolor_platform,zuma)
 PRODUCT_PACKAGES += \
 	android.hardware.composer.hwc3-service.pixel \
 	libdisplaycolor \
@@ -933,37 +730,13 @@ PRODUCT_PACKAGES += \
 	libstagefright_hdcp \
 	libskia_opt
 
-#PRODUCT_PACKAGES += \
-	mfc_fw.bin \
-	calliope_sram.bin \
-	calliope_dram.bin \
-	calliope_iva.bin \
-	vts.bin
-
 PRODUCT_PACKAGES += ShannonIms
 
 PRODUCT_PACKAGES += ShannonRcs
 
-# Exynos RIL and telephony
-# Multi SIM(DSDS)
-SIM_COUNT := 2
-SUPPORT_MULTI_SIM := true
-# Support NR
-SUPPORT_NR := true
-# Support 5G on both stacks
-SUPPORT_NR_DS := true
-# Using IRadio 2.1
-USE_RADIO_HAL_2_1 := true
-# Using Early Send Device Info
-USE_EARLY_SEND_DEVICE_INFO := true
-# Using New Radio Access Format to modem
-USE_NEW_RADIO_ACCESS_SPECIFIER_FORMAT := true
-
 $(call inherit-product, $(SRC_TARGET_DIR)/product/core_64_bit_only.mk)
 
 include device/google/gs-common/sensors/sensors.mk
-# Zuma Pro USF configuration is identical to Zuma
-$(call soong_config_set,usf,target_soc,zuma)
 
 PRODUCT_COPY_FILES += \
 	device/google/zumapro/default-permissions.xml:$(TARGET_COPY_OUT_PRODUCT)/etc/default-permissions/default-permissions.xml \
@@ -974,18 +747,9 @@ PRODUCT_PACKAGES += \
 	android.hardware.health-service.zumapro \
 	android.hardware.health-service.zumapro_recovery \
 
-# Audio
-# Audio Vendor Prebuilt
-$(call soong_config_set,aoc_spk_post_processing,prebuilts_dir,$(RELEASE_GOOGLE_SPKPOSTPROCESSING_ZUMAPRO_DIR))
-
 # Audio HAL Server & Default Implementations
 include device/google/gs-common/audio/aidl.mk
 
-## AoC soong
-$(call soong_config_set,aoc,target_soc,zumapro)
-$(call soong_config_set,aoc,target_product,$(TARGET_PRODUCT))
-
-#
 ## Audio properties
 PRODUCT_PROPERTY_OVERRIDES += \
 	persist.vendor.audio.cca.unsupported=false
@@ -995,13 +759,8 @@ PRODUCT_PROPERTY_OVERRIDES += \
 	ro.audio.monitorRotation = true \
 	ro.audio.offload_wakelock=false
 
-ifneq (,$(OVERRIDE_MEDIA_VOLUME_STEPS))
-PRODUCT_PROPERTY_OVERRIDES += \
-	ro.config.media_vol_steps=$(OVERRIDE_MEDIA_VOLUME_STEPS)
-else
 PRODUCT_PROPERTY_OVERRIDES += \
 	ro.config.media_vol_steps=25
-endif
 
 # vndservicemanager and vndservice no longer included in API 30+, however needed by vendor code.
 # See b/148807371 for reference
@@ -1025,8 +784,6 @@ PRODUCT_PROPERTY_OVERRIDES += persist.vendor.enable.thermal.genl=true
 
 # EdgeTPU
 include device/google/gs-common/edgetpu/edgetpu.mk
-# Config variables for TPU chip on device.
-$(call soong_config_set,edgetpu_config,chip,rio_pro)
 
 # TPU firmware
 PRODUCT_PACKAGES += edgetpu-rio.fw
@@ -1046,10 +803,8 @@ PRODUCT_PACKAGES += \
 # pKVM
 $(call inherit-product, packages/modules/Virtualization/apex/product_packages.mk)
 PRODUCT_BUILD_PVMFW_IMAGE := true
-ifeq ($(RELEASE_AVF_ENABLE_LLPVM_CHANGES),true)
-	# Set the environment variable to enable the Secretkeeper HAL service.
-	SECRETKEEPER_ENABLED := true
-endif
+# Set the environment variable to enable the Secretkeeper HAL service.
+SECRETKEEPER_ENABLED := true
 
 # Enable to build standalone vendor_kernel_boot image.
 PRODUCT_BUILD_VENDOR_KERNEL_BOOT_IMAGE := true
@@ -1074,9 +829,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
 # Project
 include hardware/google/pixel/common/pixel-common-device.mk
 
-# RadioExt Version
-USES_RADIOEXT_V1_7 = true
-
 # Wifi ext
 include hardware/google/pixel/wifi_ext/device.mk
 
@@ -1095,11 +847,9 @@ PRODUCT_PROPERTY_OVERRIDES += \
 # Hardware Info Collection
 include hardware/google/pixel/HardwareInfo/HardwareInfo.mk
 
-ifneq ($(BOARD_WITHOUT_RADIO),true)
 # RIL extension service
 ifeq (,$(filter aosp_%,$(TARGET_PRODUCT)))
 include device/google/gs-common/pixel_ril/ril.mk
-endif
 endif
 
 # Telephony satellite geofence data file

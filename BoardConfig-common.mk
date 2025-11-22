@@ -21,13 +21,6 @@ ifneq ($(wildcard $(TARGET_KERNEL_DIR)/16kb/),)
 include device/google/zumapro/BoardConfig-16k-common.mk
 endif
 
-# HACK : To fix up after bring up multimedia devices.
-TARGET_SOC := zumapro
-
-TARGET_SOC_NAME := google
-
-USES_DEVICE_GOOGLE_ZUMAPRO := true
-
 TARGET_ARCH := arm64
 TARGET_ARCH_VARIANT := armv8-2a
 TARGET_CPU_ABI := arm64-v8a
@@ -50,7 +43,6 @@ endif
 BOARD_BOOTCONFIG += androidboot.boot_devices=13200000.ufs
 
 TARGET_NO_BOOTLOADER := true
-TARGET_NO_RADIOIMAGE := true
 BOARD_PREBUILT_BOOTIMAGE := $(wildcard $(TARGET_KERNEL_DIR)/boot.img)
 TARGET_NO_KERNEL := true
 BOARD_USES_GENERIC_KERNEL_IMAGE := true
@@ -98,58 +90,6 @@ ifneq ($(PRODUCT_BUILD_PVMFW_IMAGE),false)
 AB_OTA_PARTITIONS += pvmfw
 endif
 
-# EMULATOR common modules
-BOARD_EMULATOR_COMMON_MODULES := liblight
-
-OVERRIDE_RS_DRIVER := libRSDriverArm.so
-BOARD_EGL_CFG := device/google/zumapro/conf/egl.cfg
-#BOARD_USES_HGL := true
-USE_OPENGL_RENDERER := true
-NUM_FRAMEBUFFER_SURFACE_BUFFERS := 3
-BOARD_USES_EXYNOS5_COMMON_GRALLOC := true
-BOARD_USES_EXYNOS_GRALLOC_VERSION := 4
-#BOARD_USES_EXYNOS_GRALLOC_VERSION := $(DEVICE_USES_EXYNOS_GRALLOC_VERSION)
-BOARD_USES_ALIGN_RESTRICTION := false
-BOARD_USES_GRALLOC_ION_SYNC := true
-
-# This should be the same value as USE_SWIFTSHADER in device.mk
-BOARD_USES_SWIFTSHADER ?= false
-
-# Gralloc4
-ifeq ($(BOARD_USES_EXYNOS_GRALLOC_VERSION),4)
-ifeq ($(BOARD_USES_SWIFTSHADER),true)
-$(warning BOARD_USES_SWIFTSHADER set to current target)
-TARGET_DISABLE_TRIPLE_BUFFERING := true
-$(call soong_config_set,arm_gralloc,gralloc_arm_no_external_afbc,true)
-$(call soong_config_set,arm_gralloc,mali_gpu_support_afbc_basic,false)
-$(call soong_config_set,arm_gralloc,mali_gpu_support_afbc_wideblk,false)
-$(call soong_config_set,arm_gralloc,gralloc_init_afbc,false)
-$(call soong_config_set,arm_gralloc,dpu_support_1010102_afbc,false)
-else
-$(call soong_config_set,arm_gralloc,gralloc_arm_no_external_afbc,false)
-$(call soong_config_set,arm_gralloc,mali_gpu_support_afbc_basic,true)
-$(call soong_config_set,arm_gralloc,mali_gpu_support_afbc_wideblk,true)
-$(call soong_config_set,arm_gralloc,gralloc_init_afbc,true)
-$(call soong_config_set,arm_gralloc,dpu_support_1010102_afbc,true)
-endif # ifeq ($(BOARD_USES_SWIFTSHADER),true)
-$(call soong_config_set,arm_gralloc,gralloc_ion_sync_on_lock,$(BOARD_USES_GRALLOC_ION_SYNC))
-endif # ifeq ($(BOARD_USES_EXYNOS_GRALLOC_VERSION),4)
-
-# libVendorGraphicbuffer
-ifeq ($(BOARD_USES_EXYNOS_GRALLOC_VERSION),4)
-$(call soong_config_set,vendorgraphicbuffer,gralloc_version,four)
-else
-$(call soong_config_set,vendorgraphicbuffer,gralloc_version,three)
-endif
-
-#display_unit_test
-ifeq ($(USES_DEVICE_GOOGLE_ZUMAPRO),true)
-$(call soong_config_set,display_unit_test,soc,zuma)
-endif
-
-# Graphics
-#BOARD_USES_EXYNOS_DATASPACE_FEATURE := true
-
 # Enable chain partition for system.
 BOARD_AVB_VBMETA_SYSTEM := system system_dlkm system_ext product
 BOARD_AVB_VBMETA_SYSTEM_KEY_PATH := external/avb/test/data/testkey_rsa2048.pem
@@ -174,7 +114,6 @@ TARGET_USERIMAGES_USE_F2FS := true
 BOARD_USERDATAIMAGE_PARTITION_SIZE := 11796480000
 PRODUCT_FS_COMPRESSION := 1
 BOARD_FLASH_BLOCK_SIZE := 4096
-BOARD_MOUNT_SDCARD_RW := true
 
 # system.img
 BOARD_SYSTEMIMAGE_FILE_SYSTEM_TYPE := ext4
@@ -189,32 +128,6 @@ TARGET_COPY_OUT_SYSTEM_EXT := system_ext
 
 # persist.img
 BOARD_PERSISTIMAGE_FILE_SYSTEM_TYPE := f2fs
-
-########################
-# Video Codec
-########################
-# 1. Exynos C2
-BOARD_USE_CODEC2_HIDL_1_2 := true
-BOARD_USE_CSC_FILTER := false
-BOARD_USE_DEC_SW_CSC := true
-BOARD_USE_ENC_SW_CSC := true
-BOARD_SUPPORT_MFC_ENC_RGB := true
-BOARD_USE_BLOB_ALLOCATOR := false
-BOARD_SUPPORT_MFC_ENC_BT2020 := true
-BOARD_SUPPORT_FLEXIBLE_P010 := true
-BOARD_SUPPORT_MFC_VERSION := 1660
-$(call soong_config_set,video_codec,target_soc_name,$(TARGET_SOC_NAME))
-$(call soong_config_set_bool,video_codec,board_use_codec2_hidl_1_2,$(BOARD_USE_CODEC2_HIDL_1_2))
-$(call soong_config_set_bool,video_codec,board_use_csc_filter,$(BOARD_USE_CSC_FILTER))
-$(call soong_config_set_bool,video_codec,board_use_dec_sw_csc,$(BOARD_USE_DEC_SW_CSC))
-$(call soong_config_set_bool,video_codec,board_use_enc_sw_csc,$(BOARD_USE_ENC_SW_CSC))
-$(call soong_config_set_bool,video_codec,board_support_mfc_enc_rgb,$(BOARD_SUPPORT_MFC_ENC_RGB))
-$(call soong_config_set_bool,video_codec,board_use_blob_allocator,$(BOARD_USE_BLOB_ALLOCATOR))
-$(call soong_config_set_bool,video_codec,board_support_mfc_enc_bt2020,$(BOARD_SUPPORT_MFC_ENC_BT2020))
-$(call soong_config_set_bool,video_codec,board_support_flexible_p010,$(BOARD_SUPPORT_FLEXIBLE_P010))
-$(call soong_config_set_bool,video_codec,board_use_codec2_aidl,$(if $(BOARD_USE_CODEC2_AIDL),true,false))
-$(call soong_config_set,video_codec,board_support_mfc_version,$(BOARD_SUPPORT_MFC_VERSION))
-########################
 
 BOARD_SUPER_PARTITION_SIZE := 8531214336
 BOARD_SUPER_PARTITION_GROUPS := google_dynamic_partitions
@@ -236,137 +149,26 @@ BOARD_USES_SYSTEM_DLKMIMAGE := true
 BOARD_SYSTEM_DLKMIMAGE_FILE_SYSTEM_TYPE := ext4
 TARGET_COPY_OUT_SYSTEM_DLKM := system_dlkm
 
-#
-# AUDIO & VOICE
-#
-BOARD_USES_GENERIC_AUDIO := true
-
-$(call soong_config_set,aoc_audio_func,ext_hidl,true)
-
-ifneq (,$(filter aosp_%,$(TARGET_PRODUCT)))
-$(call soong_config_set,aoc_audio_func,aosp_build,true)
-endif
-
-# Primary AudioHAL Configuration
-#BOARD_USE_COMMON_AUDIOHAL := true
-#BOARD_USE_CALLIOPE_AUDIOHAL := false
-#BOARD_USE_AUDIOHAL := true
-
-# Compress Offload Configuration
-#BOARD_USE_OFFLOAD_AUDIO := true
-#BOARD_USE_OFFLOAD_EFFECT := false
-
-# SoundTriggerHAL Configuration
-#BOARD_USE_SOUNDTRIGGER_HAL := false
-
-# Vibrator HAL actuator model configuration
-$(call soong_config_set,haptics,actuator_model,$(ACTUATOR_MODEL))
-$(call soong_config_set,haptics,adaptive_haptics_feature,$(ADAPTIVE_HAPTICS_FEATURE))
-
-# HWComposer
-BOARD_HWC_VERSION := hwc3
-TARGET_RUNNING_WITHOUT_SYNC_FRAMEWORK := false
-BOARD_HDMI_INCAPABLE := true
-TARGET_USES_HWC2 := true
-HWC_SUPPORT_RENDER_INTENT := true
-HWC_SUPPORT_COLOR_TRANSFORM := true
-#BOARD_USES_DISPLAYPORT := true
-# if AFBC is enabled, must set ro.vendor.ddk.set.afbc=1
-BOARD_USES_EXYNOS_AFBC_FEATURE := true
-#BOARD_USES_HDRUI_GLES_CONVERSION := true
-
-BOARD_LIBACRYL_DEFAULT_COMPOSITOR := fimg2d_zuma
-BOARD_LIBACRYL_G2D_HDR_PLUGIN := libacryl_hdr_plugin
-$(call soong_config_set,acryl,libacryl_g2d_hdr_plugin,//hardware/google/graphics/zuma/libacryl_plugins:libacryl_hdr_plugin)
-$(call soong_config_set,acryl,libacryl_c_include,hardware/google/graphics/$(TARGET_BOARD_PLATFORM)/libcap)
-
-# HWCServices
-BOARD_USES_HWC_SERVICES := true
-
-# WiFiDisplay
-# BOARD_USES_VIRTUAL_DISPLAY := true
-# BOARD_USES_VDS_EXYNOS_HWC := true
-# BOARD_USES_WIFI_DISPLAY:= true
-# BOARD_USES_EGL_SURFACE_FOR_COMPOSITION_MIXED := true
-# BOARD_USES_VDS_YUV420SPM := true
-# BOARD_USES_VDS_OTHERFORMAT := true
-# BOARD_USES_VDS_DEBUG_FLAG := true
-# BOARD_USES_DISABLE_COMPOSITIONTYPE_GLES := true
-# BOARD_USES_SECURE_ENCODER_ONLY := true
-# BOARD_USES_TSMUX := true
-
-# SCALER
-BOARD_USES_DEFAULT_CSC_HW_SCALER := true
-BOARD_DEFAULT_CSC_HW_SCALER := 4
-BOARD_USES_SCALER_M2M1SHOT := true
-
 # Device Tree
-BOARD_USES_DT := true
 BOARD_INCLUDE_DTB_IN_BOOTIMG := true
 BOARD_PREBUILT_DTBIMAGE_DIR := $(TARGET_KERNEL_DIR)
 BOARD_PREBUILT_DTBOIMAGE := $(BOARD_PREBUILT_DTBIMAGE_DIR)/dtbo.img
 
-# PLATFORM LOG
-TARGET_USES_LOGD := true
-
-# LIBHWJPEG
-#TARGET_USES_UNIVERSAL_LIBHWJPEG := true
-#LIBHWJPEG_HWSCALER_ID := 0
-
-#Keymaster
-#BOARD_USES_KEYMASTER_VER1 := true
-
-#FMP
-#BOARD_USES_FMP_DM_CRYPT := true
-#BOARD_USES_FMP_FSCRYPTO := true
 BOARD_USES_METADATA_PARTITION := true
-
-# SKIA
-#BOARD_USES_SKIA_MULTITHREADING := true
-#BOARD_USES_FIMGAPI_V5X := true
 
 # SECCOMP Policy
 BOARD_SECCOMP_POLICY = device/google/zumapro/seccomp_policy
 
-#CURL
-BOARD_USES_CURL := true
-
-# Sensor HAL
-BOARD_USES_EXYNOS_SENSORS_DUMMY := true
-
-# VISION
-# Exynos vision framework (EVF)
-#TARGET_USES_EVF := true
-# HW acceleration
-#TARGET_USES_VPU_KERNEL := true
-#TARGET_USES_SCORE_KERNEL := true
-#TARGET_USES_CL_KERNEL := false
-
 # exynos RIL
-TARGET_EXYNOS_RIL_SOURCE := true
 ENABLE_VENDOR_RIL_SERVICE := true
-
-# GNSS
-# BOARD_USES_EXYNOS_GNSS_DUMMY := true
 
 # Bluetooth defines
 # TODO(b/123695868): Remove the need for this
 BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := \
 	build/make/target/board/mainline_arm64/bluetooth
 
-#VNDK
-BOARD_PROPERTY_OVERRIDES_SPLIT_ENABLED := true
-BOARD_VNDK_VERSION := current
-
-# H/W align restriction of MM IPs
-BOARD_EXYNOS_S10B_FORMAT_ALIGN := 64
-
 # Boot.img
 BOARD_RAMDISK_USE_LZ4     := true
-#BOARD_KERNEL_BASE        := 0x80000000
-#BOARD_KERNEL_PAGESIZE    := 2048
-#BOARD_KERNEL_OFFSET      := 0x80000
-#BOARD_RAMDISK_OFFSET     := 0x4000000
 BOARD_BOOT_HEADER_VERSION := 4
 BOARD_MKBOOTIMG_ARGS += --header_version $(BOARD_BOOT_HEADER_VERSION)
 
@@ -417,9 +219,6 @@ ifndef BOARD_SYSTEM_KERNEL_MODULES_LOAD
 $(error system_dlkm.modules.load not found or empty)
 endif
 BOARD_SYSTEM_KERNEL_MODULES := $(addprefix $(KERNEL_MODULE_DIR)/, $(notdir $(BOARD_SYSTEM_KERNEL_MODULES_LOAD)))
-
-# Using BUILD_COPY_HEADERS
-BUILD_BROKEN_USES_BUILD_COPY_HEADERS := true
 
 include device/google/zumapro/sepolicy/zumapro-sepolicy.mk
 

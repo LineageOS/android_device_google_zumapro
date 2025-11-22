@@ -40,8 +40,3 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/aosp_product.mk)
 # TODO(b/136525499): move *_vendor.mk into the vendor makefile later
 $(call inherit-product, $(SRC_TARGET_DIR)/product/handheld_vendor.mk)
 $(call inherit-product, $(SRC_TARGET_DIR)/product/telephony_vendor.mk)
-
-#$(call inherit-product, device/google/zumapro/device.mk)
-
-# TODO: fix
-# PRODUCT_RESTRICT_VENDOR_FILES := all
