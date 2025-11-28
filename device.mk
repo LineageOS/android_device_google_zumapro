@@ -5,40 +5,116 @@
 # SPDX-License-Identifier: Apache-2.0
 #
 
-include device/google/gs-common/device.mk
-include device/google/gs-common/gs_watchdogd/watchdog.mk
-include device/google/gs-common/ramdump_and_coredump/ramdump_and_coredump.mk
-include device/google/gs-common/soc/soc.mk
-include device/google/gs-common/modem/modem.mk
-include device/google/gs-common/aoc/aoc.mk
-include device/google/gs-common/trusty/trusty.mk
-include device/google/gs-common/pcie/pcie.mk
-include device/google/gs-common/storage/storage.mk
-include device/google/gs-common/thermal/dump/thermal.mk
-include device/google/gs-common/thermal/thermal_hal/device.mk
-include device/google/gs-common/performance/perf.mk
-include device/google/gs-common/power/power.mk
-include device/google/gs-common/pixel_metrics/pixel_metrics.mk
-include device/google/gs-common/soc/freq.mk
-include device/google/gs-common/gps/dump/log.mk
-include device/google/gs-common/bcmbt/dump/dumplog.mk
-include device/google/gs-common/display/dump_exynos_display.mk
-include device/google/gs-common/display_logbuffer/dump.mk
-include device/google/gs-common/gxp/gxp.mk
-include device/google/gs-common/camera/dump.mk
-include device/google/gs-common/radio/dump.mk
-include device/google/gs-common/gear/dumpstate/aidl.mk
-include device/google/gs-common/widevine/widevine.mk
-include device/google/gs-common/sota_app/factoryota.mk
-include device/google/gs-common/misc_writer/misc_writer.mk
-include device/google/gs-common/bootctrl/bootctrl_aidl.mk
-include device/google/gs-common/betterbug/betterbug.mk
-include device/google/gs-common/recorder/recorder.mk
-include device/google/gs-common/fingerprint/fingerprint.mk
-include device/google/gs-common/nfc/nfc.mk
-include device/google/gs-common/16kb/16kb.mk
+# Voice packs for Text-To-Speech
+PRODUCT_COPY_FILES += \
+    device/google/gs-common/tts/ja-jp/ja-jp-x-multi-r55.zvoice:$(TARGET_COPY_OUT_PRODUCT)/tts/google/ja-jp/ja-jp-x-multi-r55.zvoice \
+    device/google/gs-common/tts/fr-fr/fr-fr-x-multi-r57.zvoice:$(TARGET_COPY_OUT_PRODUCT)/tts/google/fr-fr/fr-fr-x-multi-r57.zvoice \
+    device/google/gs-common/tts/de-de/de-de-x-multi-r57.zvoice:$(TARGET_COPY_OUT_PRODUCT)/tts/google/de-de/de-de-x-multi-r57.zvoice \
+    device/google/gs-common/tts/it-it/it-it-x-multi-r54.zvoice:$(TARGET_COPY_OUT_PRODUCT)/tts/google/it-it/it-it-x-multi-r54.zvoice \
+    device/google/gs-common/tts/es-es/es-es-x-multi-r56.zvoice:$(TARGET_COPY_OUT_PRODUCT)/tts/google/es-es/es-es-x-multi-r56.zvoice
 
-include device/google/zumapro/dumpstate/item.mk
+PRODUCT_SOONG_NAMESPACES += \
+    device/google/gs-common/powerstats
+
+# Disable OMX
+PRODUCT_PROPERTY_OVERRIDES += \
+    vendor.media.omx=0
+
+# Installs gsi keys into ramdisk, to boot a developer GSI with verified boot.
+$(call inherit-product, $(SRC_TARGET_DIR)/product/developer_gsi_keys.mk)
+
+PRODUCT_COPY_FILES += \
+    frameworks/native/data/etc/android.software.ipsec_tunnel_migration.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.software.ipsec_tunnel_migration.xml
+
+DEVICE_PRODUCT_COMPATIBILITY_MATRIX_FILE += \
+    device/google/gs-common/vintf/framework_compatibility_matrix.xml
+
+# Platform watchdogd
+PRODUCT_PACKAGES += gs_watchdogd
+PRODUCT_SOONG_NAMESPACES += \
+    device/google/gs-common/gs_watchdogd
+
+# sscoredump
+PRODUCT_PROPERTY_OVERRIDES += vendor.debug.ssrdump.type=sscoredump
+
+# SoC
+PRODUCT_PACKAGES += dump_soc
+
+# Modem
+PRODUCT_PACKAGES += dump_modem
+PRODUCT_PACKAGES += dump_modemlog
+
+# AoC
+PRODUCT_PACKAGES += dump_aoc
+
+# If AoC Daemon is not present on this build, load firmware at boot via rc
+PRODUCT_COPY_FILES += \
+    device/google/gs-common/aoc/conf/init.aoc.daemon.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/init.aoc.rc
+
+# Trusty
+PRODUCT_PACKAGES += dump_trusty.sh
+
+# PCI express
+PRODUCT_PACKAGES += dump_pcie.sh
+
+# Storage
+PRODUCT_PACKAGES += dump_storage
+
+# Thermal
+PRODUCT_PACKAGES += dump_thermal.sh
+
+PRODUCT_PACKAGES += android.hardware.thermal-service.pixel
+
+# Thermal utils
+PRODUCT_PACKAGES += thermal_symlinks
+
+# Performance
+PRODUCT_PACKAGES += dump_perf
+
+# Ensure enough free space to create zram backing device
+PRODUCT_PRODUCT_PROPERTIES += \
+    ro.zram_backing_device_min_free_mb=1536
+
+#include device/google/gs-common/power/power.mk
+PRODUCT_PACKAGES += init.power-gs.rc
+
+#include device/google/gs-common/pixel_metrics/pixel_metrics.mk
+PRODUCT_PACKAGES += dump_pixel_metrics
+
+#include device/google/gs-common/soc/freq.mk
+PRODUCT_PACKAGES += dump_devfreq
+
+#include device/google/gs-common/display/dump_exynos_display.mk
+PRODUCT_PACKAGES += dump_exynos_display
+
+#include device/google/gs-common/display_logbuffer/dump.mk
+PRODUCT_PACKAGES += dump_display_logbuffer
+
+#include device/google/gs-common/gear/dumpstate/aidl.mk
+PRODUCT_PACKAGES += android.hardware.dumpstate-service
+
+#include device/google/gs-common/widevine/widevine.mk
+PRODUCT_PACKAGES += \
+    android.hardware.drm-service.clearkey
+
+#include device/google/gs-common/misc_writer/misc_writer.mk
+PRODUCT_PACKAGES += \
+    misc_writer
+
+#include device/google/gs-common/bootctrl/bootctrl_aidl.mk
+PRODUCT_PACKAGES += \
+    android.hardware.boot-service.default-pixel \
+    android.hardware.boot-service.default_recovery-pixel
+
+PRODUCT_SOONG_NAMESPACES += device/google/gs-common/bootctrl/aidl
+
+#include device/google/gs-common/fingerprint/fingerprint.mk
+PRODUCT_PACKAGES += dump_fingerprint
+
+#include device/google/gs-common/16kb/16kb.mk
+PRODUCT_PACKAGES += copy_efs_files_to_data
+
+PRODUCT_PACKAGES += dump_power
 
 TARGET_BOARD_PLATFORM := zumapro
 
@@ -161,12 +237,13 @@ PRODUCT_PROPERTY_OVERRIDES += \
 	persist.vendor.modem.extensive_logging_enabled=false
 
 # Shared Modem Platform
-include device/google/gs-common/modem/modem_svc_sit/shared_modem_platform.mk
+DEVICE_PRODUCT_COMPATIBILITY_MATRIX_FILE += device/google/gs-common/modem/modem_svc_sit/compatibility_matrix.xml
 
 # HWUI
 TARGET_USES_VULKAN = true
 
-include device/google/gs-common/gpu/gpu.mk
+#include device/google/gs-common/gpu/gpu.mk
+PRODUCT_PACKAGES += gpu_probe
 
 # Install the OpenCL ICD Loader
 PRODUCT_SOONG_NAMESPACES += external/OpenCL-ICD-Loader
@@ -274,7 +351,9 @@ PRODUCT_PACKAGES += \
 	fstab.zumapro-fips.vendor_ramdisk
 
 # Shell scripts
-include device/google/gs-common/insmod/insmod.mk
+PRODUCT_PACKAGES += \
+    insmod.sh \
+    init.common.cfg
 
 # Insmod config files
 PRODUCT_COPY_FILES += \
@@ -286,7 +365,7 @@ PRODUCT_HOST_PACKAGES += \
 
 # CHRE
 ## hal
-include device/google/gs-common/chre/hal.mk
+PRODUCT_PACKAGES += android.hardware.contexthub-service.generic
 PRODUCT_COPY_FILES += \
 	frameworks/native/data/etc/android.hardware.context_hub.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.context_hub.xml
 
@@ -372,10 +451,22 @@ PRODUCT_PROPERTY_OVERRIDES += aaudio.hw_burst_min_usec=2000
 # Set util_clamp_min for s/w spatializer
 PRODUCT_PROPERTY_OVERRIDES += audio.spatializer.effect.util_clamp_min=300
 
-# WideVine modules
-include device/google/zumapro/widevine/device.mk
+#include device/google/gs-common/camera/lyric.mk
+PRODUCT_SOONG_NAMESPACES += \
+    hardware/google/camera
 
-include device/google/gs-common/camera/lyric.mk
+# Init-time log settings for Google 3A
+PRODUCT_PACKAGES += libg3a_standalone_gabc_rc
+PRODUCT_PACKAGES += libg3a_standalone_gaf_rc
+PRODUCT_PACKAGES += libg3a_standalone_ghawb_rc
+
+PRODUCT_PACKAGES += lyric_preview_dis_xml
+
+DEVICE_PRODUCT_COMPATIBILITY_MATRIX_FILE += \
+    device/google/gs-common/camera/device_framework_matrix_product.xml
+
+DEVICE_MATRIX_FILE += \
+    device/google/gs-common/camera/compatibility_matrix.xml
 
 # Connectivity
 PRODUCT_PACKAGES += \
@@ -386,7 +477,11 @@ PRODUCT_PACKAGES += \
 	android.hardware.health.storage-service.default
 
 # Battery Mitigation
-include device/google/gs-common/battery_mitigation/bcl.mk
+PRODUCT_PROPERTY_OVERRIDES += \
+    vendor.battery_mitigation.aidl.enable=true
+
+DEVICE_PRODUCT_COMPATIBILITY_MATRIX_FILE += device/google/gs-common/battery_mitigation/compatibility_matrix.xml
+
 # storage pixelstats
 -include hardware/google/pixel/pixelstats/device.mk
 
@@ -397,9 +492,6 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/virtual_ab_ota/launch_with_ven
 
 # Enforce generic ramdisk allow list
 $(call inherit-product, $(SRC_TARGET_DIR)/product/generic_ramdisk.mk)
-
-# Titan-M
-include device/google/gs-common/dauntless/gsc.mk
 
 # WiFi
 PRODUCT_COPY_FILES += \
@@ -500,14 +592,6 @@ PRODUCT_PACKAGES += wpa_supplicant.conf
 WIFI_PRIV_CMD_UPDATE_MBO_CELL_STATUS := enabled
 
 # Video
-# 1. Codec 2.0
-# for settings used by different C2 hal
-include device/google/gs-common/mediacodec/common/mediacodec_common.mk
-# for Exynos C2 Hal
-include device/google/gs-common/mediacodec/samsung/mediacodec_samsung.mk
-# for Bigwave C2 Hal
-include device/google/gs-common/mediacodec/bigwave/mediacodec_bigwave.mk
-
 PRODUCT_PROPERTY_OVERRIDES += \
        debug.c2.use_dmabufheaps=1 \
        media.c2.dmabuf.padding=512 \
@@ -569,7 +653,7 @@ PRODUCT_PACKAGES += \
 
 $(call inherit-product, $(SRC_TARGET_DIR)/product/core_64_bit_only.mk)
 
-include device/google/gs-common/sensors/sensors.mk
+PRODUCT_PACKAGES += dump_sensors
 
 PRODUCT_COPY_FILES += \
 	device/google/zumapro/default-permissions.xml:$(TARGET_COPY_OUT_PRODUCT)/etc/default-permissions/default-permissions.xml \
@@ -581,7 +665,23 @@ PRODUCT_PACKAGES += \
 	android.hardware.health-service.zumapro_recovery \
 
 # Audio HAL Server & Default Implementations
-include device/google/gs-common/audio/aidl.mk
+DEVICE_MANIFEST_FILE += device/google/gs-common/audio/aidl/manifest.xml
+
+PRODUCT_PACKAGES += \
+    libvisualizeraidl \
+    libbundleaidl \
+    libreverbaidl \
+    libdynamicsprocessingaidl \
+    libloudnessenhanceraidl \
+    libdownmixaidl \
+    libhapticgeneratoraidl
+
+DEVICE_PRODUCT_COMPATIBILITY_MATRIX_FILE += device/google/gs-common/audio/aidl/device_framework_matrix_product.xml
+
+PRODUCT_PROPERTY_OVERRIDES += \
+    vendor.audio_hal.aidl.enable=true
+PRODUCT_SYSTEM_EXT_PROPERTIES += \
+    ro.audio.ihaladaptervendorextension_enabled=true
 
 ## Audio properties
 PRODUCT_PROPERTY_OVERRIDES += \
@@ -601,13 +701,18 @@ PRODUCT_PACKAGES += vndservicemanager
 PRODUCT_PACKAGES += vndservice
 
 ## Start packet router
-include device/google/gs-common/telephony/pktrouter.mk
+PRODUCT_PROPERTY_OVERRIDES += vendor.pktrouter=1
 
 # Thermal HAL
 PRODUCT_PROPERTY_OVERRIDES += persist.vendor.enable.thermal.genl=true
 
 # EdgeTPU
-include device/google/gs-common/edgetpu/edgetpu.mk
+# Tflite Darwinn delegate property
+PRODUCT_VENDOR_PROPERTIES += vendor.edgetpu.tflite_delegate.force_disable_io_coherency=0
+
+# Edgetpu CPU scheduler property
+PRODUCT_VENDOR_PROPERTIES += vendor.edgetpu.cpu_scheduler.policy=FIFO
+PRODUCT_VENDOR_PROPERTIES += vendor.edgetpu.cpu_scheduler.priority=99
 
 # A/B support
 PRODUCT_PACKAGES += \
@@ -665,13 +770,16 @@ PRODUCT_PROPERTY_OVERRIDES += \
 include hardware/google/pixel/HardwareInfo/HardwareInfo.mk
 
 # RIL extension service
-include device/google/gs-common/pixel_ril/ril.mk
+DEVICE_MANIFEST_FILE += device/google/gs-common/pixel_ril/manifest_ril_ds.xml
+DEVICE_PRODUCT_COMPATIBILITY_MATRIX_FILE += device/google/gs-common/pixel_ril/compatibility_matrix.xml
 
 # Touch service
-include device/google/gs-common/touch/twoshay/aidl_zuma.mk
-include device/google/gs-common/touch/twoshay/twoshay.mk
+DEVICE_MANIFEST_FILE += device/google/gs-common/touch/twoshay/aidl/manifest_zuma.xml
+DEVICE_PRODUCT_COMPATIBILITY_MATRIX_FILE += device/google/gs-common/touch/twoshay/aidl/compatibility_matrix_zuma.xml
 
-include device/google/gs-common/input/gia/gia.mk
+# GIA
+DEVICE_MANIFEST_FILE += device/google/gs-common/input/gia/aidl/manifest.xml
+DEVICE_PRODUCT_COMPATIBILITY_MATRIX_FILE += device/google/gs-common/input/gia/aidl/compatibility_matrix.xml
 
 PRODUCT_CHECK_VENDOR_SEAPP_VIOLATIONS := true
 
@@ -701,7 +809,7 @@ PRODUCT_PRODUCT_PROPERTIES += \
     ro.vendor.camera.extensions.service=com.google.android.apps.camera.services.extensions.service.PixelExtensions
 
 # Experiments
-include device/google/gs-common/performance/experiments/experiments.mk
+PRODUCT_PACKAGES += pixel-experiments-recovery.sh
 
 # Google Assistant
 PRODUCT_PRODUCT_PROPERTIES += ro.opa.eligible_device=true
