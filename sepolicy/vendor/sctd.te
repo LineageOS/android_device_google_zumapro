@@ -1,0 +1,4 @@
+type sctd, domain;
+type sctd_exec, exec_type, file_type, vendor_file_type;
+
+init_daemon_domain(sctd)

@@ -1,0 +1,29 @@
+type liboemservice_proxy_default, domain;
+type liboemservice_proxy_default_exec, exec_type, file_type, vendor_file_type;
+type liboemservice_proxy_service, hal_service_type, service_manager_type;
+
+add_service(liboemservice_proxy_default, liboemservice_proxy_service)
+
+binder_call(liboemservice_proxy_default, dmd)
+binder_call(liboemservice_proxy_default, hwservicemanager)
+
+binder_use(liboemservice_proxy_default)
+
+get_prop(liboemservice_proxy_default, hwservicemanager_prop)
+get_prop(liboemservice_proxy_default, vendor_persist_config_default_prop)
+
+init_daemon_domain(liboemservice_proxy_default)
+
+set_prop(liboemservice_proxy_default, vendor_diag_prop)
+set_prop(liboemservice_proxy_default, vendor_modem_prop)
+set_prop(liboemservice_proxy_default, vendor_slog_prop)
+
+allow liboemservice_proxy_default hal_vendor_oem_hwservice:hwservice_manager find;
+allow liboemservice_proxy_default node:tcp_socket node_bind;
+allow liboemservice_proxy_default radio_device:chr_file rw_file_perms;
+allow liboemservice_proxy_default radio_vendor_data_file:dir create_dir_perms;
+allow liboemservice_proxy_default radio_vendor_data_file:file create_file_perms;
+allow liboemservice_proxy_default self:tcp_socket { accept create_socket_perms_no_ioctl listen };
+allow liboemservice_proxy_default serial_device:chr_file rw_file_perms;
+allow liboemservice_proxy_default vendor_slog_file:dir create_dir_perms;
+allow liboemservice_proxy_default vendor_slog_file:file create_file_perms;

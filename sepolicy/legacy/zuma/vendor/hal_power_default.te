@@ -1,8 +1,0 @@
-allow hal_power_default sysfs_gpu:file rw_file_perms;
-allow hal_power_default sysfs_fabric:file rw_file_perms;
-allow hal_power_default sysfs_camera:file rw_file_perms;
-allow hal_power_default sysfs_em_profile:file rw_file_perms;
-allow hal_power_default sysfs_display:file rw_file_perms;
-allow hal_power_default sysfs_trusty:file rw_file_perms;
-set_prop(hal_power_default, vendor_camera_prop);
-allow hal_power_default sysfs_vendor_mm:file rw_file_perms;

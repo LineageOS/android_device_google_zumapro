@@ -1,10 +1,29 @@
-# Allow ITouchContextService callback
-binder_call(twoshay, systemui_app)
+type twoshay, domain;
+type twoshay_exec, exec_type, file_type, vendor_file_type;
+
+add_service(twoshay, gril_antenna_tuning_service)
+add_service(twoshay, screen_protector_detector_service)
+add_service(twoshay, touch_context_service)
+add_service(twoshay, twoshay_file_dump_service)
+add_service(twoshay, twoshay_notification_service)
 
 binder_call(twoshay, grilservice_app)
+binder_call(twoshay, platform_app)
+binder_call(twoshay, stats_service_server)
 
-# b/324278826
+binder_use(twoshay)
+
+init_daemon_domain(twoshay)
+
 unix_socket_connect(twoshay, chre, chre)
-# TODO(b/248615564): Remove above rule after CHRE multiclient HAL is launched.
 unix_socket_connect(twoshay, chre, hal_contexthub_default)
+
+allow twoshay dumpstate:fd use;
+allow twoshay dumpstate:fifo_file write;
+allow twoshay fwk_stats_service:service_manager find;
 allow twoshay self:capability2 block_suspend;
+allow twoshay touch_offload_device:chr_file rw_file_perms;
+allow twoshay twoshay:capability sys_nice;
+
+dontaudit twoshay boot_status_prop:file read;
+dontaudit twoshay twoshay:capability dac_override;

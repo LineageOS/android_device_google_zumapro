@@ -1,0 +1,5 @@
+dump_hal(hal_uwb)
+
+allow hal_uwb_default uci_device:chr_file rw_file_perms;
+allow hal_uwb_default uwb_data_vendor:dir create_dir_perms;
+allow hal_uwb_default uwb_data_vendor:file create_file_perms;

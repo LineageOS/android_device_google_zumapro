@@ -1,0 +1,4 @@
+pixel_bugreport(dump_tpu)
+
+allow dump_tpu sysfs_edgetpu:dir search;
+allow dump_tpu sysfs_edgetpu:file r_file_perms;

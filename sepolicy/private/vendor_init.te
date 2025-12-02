@@ -1,2 +1,0 @@
-# b/277300125
-dontaudit vendor_init device_config_configuration_prop:property_service { set };

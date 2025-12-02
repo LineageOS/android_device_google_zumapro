@@ -1,0 +1,1 @@
+dontaudit bluetooth default_android_service:service_manager find;

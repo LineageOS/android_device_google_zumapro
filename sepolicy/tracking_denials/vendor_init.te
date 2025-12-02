@@ -1,5 +1,0 @@
-# b/317316031
-dontaudit vendor_init debugfs_trace_marker:file { getattr };
-dontaudit vendor_init default_prop:property_service { set };
-# b/322035750
-dontaudit vendor_init vendor_gps_prop:property_service { set };

@@ -1,0 +1,30 @@
+type copy_efs_files_to_data, domain;
+type copy_efs_files_to_data_exec, exec_type, file_type, vendor_file_type;
+
+init_daemon_domain(copy_efs_files_to_data)
+
+allow copy_efs_files_to_data block_device:dir search;
+allow copy_efs_files_to_data efs_block_device:blk_file r_file_perms;
+allow copy_efs_files_to_data kmsg_debug_device:chr_file { getattr ioctl w_file_perms };
+allow copy_efs_files_to_data modem_efs_file:dir getattr;
+allow copy_efs_files_to_data modem_efs_image_file:dir create_dir_perms;
+allow copy_efs_files_to_data modem_efs_image_file:{ file lnk_file } create_file_perms;
+allow copy_efs_files_to_data modem_userdata_block_device:blk_file r_file_perms;
+allow copy_efs_files_to_data modem_userdata_file:dir getattr;
+allow copy_efs_files_to_data persist_block_device:blk_file r_file_perms;
+allow copy_efs_files_to_data persist_file:dir getattr;
+allow copy_efs_files_to_data self:capability chown;
+allow copy_efs_files_to_data self:capability fowner;
+allow copy_efs_files_to_data sysfs_scsi_devices_0000:dir r_dir_perms;
+allow copy_efs_files_to_data sysfs_scsi_devices_0000:file r_file_perms;
+allow copy_efs_files_to_data system_bootstrap_lib_file:dir search;
+allow copy_efs_files_to_data vendor_file:file { execute_no_trans getattr };
+allow copy_efs_files_to_data vendor_shell_exec:file rx_file_perms;
+allow copy_efs_files_to_data vendor_toolbox_exec:file rx_file_perms;
+
+dontaudit copy_efs_files_to_data dev_type:blk_file write;
+dontaudit copy_efs_files_to_data modem_efs_file:{ dir file } relabelto;
+dontaudit copy_efs_files_to_data modem_efs_image_file:{ dir file } relabelfrom;
+dontaudit copy_efs_files_to_data modem_userdata_file:{ dir file } relabelto;
+dontaudit copy_efs_files_to_data self:capability sys_admin;
+dontaudit copy_efs_files_to_data vendor_persist_type:{ dir file } relabelto;
