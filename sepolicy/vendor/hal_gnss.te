@@ -1,0 +1,10 @@
+binder_call(hal_gnss_default, gnssd)
+binder_call(hal_gnss_default, hal_gnss_pixel)
+
+get_prop(hal_gnss_default, vendor_gps_prop)
+
+allow hal_gnss_default fwk_sensor_service:service_manager find;
+allow hal_gnss_default gnssd:unix_stream_socket connectto;
+allow hal_gnss_default sysfs_gps:file rw_file_perms;
+allow hal_gnss_default vendor_gps_file:dir create_dir_perms;
+allow hal_gnss_default vendor_gps_file:{ fifo_file file } create_file_perms;

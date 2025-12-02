@@ -1,8 +1,6 @@
-# Telephony
-telephony.TnNtn.image_switch u:object_r:telephony_modem_prop:s0    exact enum ntn tn
-telephony.ril.modem_bin_status u:object_r:telephony_modemtype_prop:s0    exact uint
-telephony.ril.silent_reset    u:object_r:telephony_ril_prop:s0    exact    bool
-telephony.ril.ntn_demo_mode   u:object_r:telephony_ntn_demo_mode_prop:s0 exact bool
-
-# HDCP setting of the display connected via USB port
-persist.sys.hdcp_checking     u:object_r:usb_control_prop:s0 exact string
+persist.sys.hdcp_checking u:object_r:usb_control_prop:s0 exact string
+repair_mode.init_completed. u:object_r:repair_mode_init_prop:s0 prefix bool
+telephony.TnNtn.image_switch u:object_r:telephony_modem_prop:s0 exact enum ntn tn
+telephony.ril.modem_bin_status u:object_r:telephony_modemtype_prop:s0 exact uint
+telephony.ril.ntn_demo_mode u:object_r:telephony_ntn_demo_mode_prop:s0 exact bool
+telephony.ril.silent_reset u:object_r:telephony_ril_prop:s0 exact bool

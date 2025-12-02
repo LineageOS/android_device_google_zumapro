@@ -1,2 +1,0 @@
-# Allow modemml.TFLiteService in system server to access NNAPI TPU service
-allow system_server edgetpu_nnapi_service:service_manager find;

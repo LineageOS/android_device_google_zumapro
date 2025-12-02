@@ -1,0 +1,1 @@
+get_prop(untrusted_app, vendor_nfc_antenna_prop)

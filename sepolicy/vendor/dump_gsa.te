@@ -1,6 +1,1 @@
 pixel_bugreport(dump_gsa)
-
-userdebug_or_eng(`
-  allow dump_gsa vendor_toolbox_exec:file execute_no_trans;
-  allow dump_gsa sysfs_gsa_log:file r_file_perms;
-')

@@ -1,2 +1,0 @@
-# b/308381747
-dontaudit modem_ml_svc_sit statsdw_socket:sock_file { write };

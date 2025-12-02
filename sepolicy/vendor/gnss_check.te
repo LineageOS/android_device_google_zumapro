@@ -1,0 +1,9 @@
+type gnss_check, domain;
+type gnss_check_exec, exec_type, file_type, vendor_file_type;
+
+init_daemon_domain(gnss_check)
+
+set_prop(gnss_check, ctl_start_prop)
+set_prop(gnss_check, ctl_stop_prop)
+
+allow gnss_check vendor_toolbox_exec:file execute_no_trans;

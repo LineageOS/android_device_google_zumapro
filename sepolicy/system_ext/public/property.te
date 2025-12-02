@@ -1,9 +1,5 @@
-# Telephony
-system_public_prop(telephony_ril_prop)
-system_restricted_prop(telephony_modem_prop)
 system_public_prop(telephony_modemtype_prop)
-system_restricted_prop(telephony_ntn_demo_mode_prop)
+system_public_prop(telephony_ril_prop)
 
-userdebug_or_eng(`
-  set_prop(shell, telephony_ril_prop)
-')
+system_restricted_prop(telephony_modem_prop)
+system_restricted_prop(telephony_ntn_demo_mode_prop)

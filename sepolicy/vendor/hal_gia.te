@@ -1,0 +1,7 @@
+type hal_gia_service, hal_service_type, protected_service, service_manager_type;
+
+binder_call(hal_gia_client, hal_gia_server)
+
+binder_use(hal_gia_server)
+
+hal_attribute_service(hal_gia, hal_gia_service)

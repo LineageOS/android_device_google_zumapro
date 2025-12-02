@@ -1,8 +1,0 @@
-# File containing sepolicies for GCA-Eng & GCA-Next.
-userdebug_or_eng(`
-        # Allows GCA_Eng & GCA-Next to access the hw_jpeg /dev/video12.
-        allow debug_camera_app hw_jpg_device:chr_file rw_file_perms;
-
-	# Allows tachyon_service to communicate with GCA-Eng via binder.
-	binder_call(edgetpu_tachyon_server, debug_camera_app);
-')

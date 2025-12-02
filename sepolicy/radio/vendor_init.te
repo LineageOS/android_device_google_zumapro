@@ -1,8 +1,0 @@
-set_prop(vendor_init, vendor_cbd_prop)
-get_prop(vendor_init, telephony_modem_prop)
-set_prop(vendor_init, telephony_modemtype_prop)
-set_prop(vendor_init, vendor_carrier_prop)
-set_prop(vendor_init, vendor_modem_prop)
-set_prop(vendor_init, vendor_rild_prop)
-set_prop(vendor_init, vendor_logger_prop)
-set_prop(vendor_init, vendor_slog_prop)
