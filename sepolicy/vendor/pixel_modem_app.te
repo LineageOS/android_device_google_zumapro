@@ -1,0 +1,8 @@
+type pixel_modem_app, domain;
+
+app_domain(pixel_modem_app)
+
+hal_client_domain(pixel_modem_app, hal_shared_modem_platform)
+
+allow pixel_modem_app app_api_service:service_manager find;
+allow pixel_modem_app radio_service:service_manager find;

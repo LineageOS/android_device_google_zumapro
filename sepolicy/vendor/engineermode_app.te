@@ -1,0 +1,10 @@
+type vendor_engineermode_app, domain;
+
+app_domain(vendor_engineermode_app)
+
+binder_call(vendor_engineermode_app, rild)
+binder_call(vendor_engineermode_app, servicemanager)
+
+allow vendor_engineermode_app app_api_service:service_manager find;
+allow vendor_engineermode_app hal_exynos_rild_hwservice:hwservice_manager find;
+allow vendor_engineermode_app hal_vendor_radio_external_service:service_manager find;

@@ -1,0 +1,8 @@
+type pixeldisplayservice_app, coredomain, domain;
+
+app_domain(pixeldisplayservice_app)
+
+allow pixeldisplayservice_app app_api_service:service_manager find;
+allow pixeldisplayservice_app cameraserver_service:service_manager find;
+allow pixeldisplayservice_app proc_vendor_sched:dir r_dir_perms;
+allow pixeldisplayservice_app proc_vendor_sched:file w_file_perms;

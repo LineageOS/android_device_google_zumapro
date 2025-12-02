@@ -1,3 +1,0 @@
-allow hal_threadnetwork_default vendor_bt_data_file:dir r_dir_perms;
-allow hal_threadnetwork_default vendor_bt_data_file:sock_file rw_file_perms;
-allow hal_threadnetwork_default hal_bluetooth_btlinux:unix_stream_socket connectto;

@@ -1,0 +1,16 @@
+type bipchmgr, domain;
+type bipchmgr_exec, exec_type, file_type, vendor_file_type;
+
+binder_call(bipchmgr, rild)
+binder_call(bipchmgr, servicemanager)
+
+binder_use(bipchmgr)
+
+get_prop(bipchmgr, hwservicemanager_prop)
+
+hwbinder_use(bipchmgr)
+
+init_daemon_domain(bipchmgr)
+
+allow bipchmgr hal_exynos_rild_hwservice:hwservice_manager find;
+allow bipchmgr hal_vendor_radio_external_service:service_manager find;

@@ -1,0 +1,13 @@
+type hal_aam, domain;
+type hal_aam_exec, exec_type, file_type, vendor_file_type;
+type hal_aam_service, hal_service_type, service_manager_type;
+
+add_service(hal_aam, hal_aam_service)
+
+binder_call(hal_aam, gmscore_app)
+
+binder_use(hal_aam)
+
+init_daemon_domain(hal_aam)
+
+allow hal_aam gnssd:unix_stream_socket connectto;

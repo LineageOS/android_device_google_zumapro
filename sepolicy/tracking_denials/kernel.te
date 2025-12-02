@@ -1,2 +1,0 @@
-# b/308381222
-dontaudit kernel kernel:capability { net_bind_service };

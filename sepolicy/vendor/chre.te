@@ -1,24 +1,16 @@
 type chre, domain;
-type chre_exec, vendor_file_type, exec_type, file_type;
+type chre_exec, exec_type, file_type, vendor_file_type;
+
+binder_call(chre, stats_service_server)
+
 init_daemon_domain(chre)
 
-# Permit communication with AoC
-allow chre aoc_device:chr_file rw_file_perms;
-
-# Allow CHRE to determine AoC's current clock
-allow chre sysfs_aoc:dir search;
-allow chre sysfs_aoc_boottime:file r_file_perms;
-
-# Allow CHRE to create thread to watch AOC's device
-allow chre device:dir r_dir_perms;
-
-# Allow CHRE to write to data to chre data directory
-allow chre chre_data_file:dir create_dir_perms;
-allow chre chre_data_file:file create_file_perms;
-
-# Allow CHRE to use WakeLock
 wakelock_use(chre)
 
-# Allow CHRE host to talk to stats service
+allow chre aoc_device:chr_file rw_file_perms;
+allow chre chre_data_file:dir create_dir_perms;
+allow chre chre_data_file:file create_file_perms;
+allow chre device:dir r_dir_perms;
 allow chre fwk_stats_service:service_manager find;
-binder_call(chre, stats_service_server)
+allow chre sysfs_aoc:dir search;
+allow chre sysfs_aoc_boottime:file r_file_perms;

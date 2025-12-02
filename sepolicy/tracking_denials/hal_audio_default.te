@@ -1,2 +1,0 @@
-# b/319399862
-dontaudit hal_audio_default bluetooth_prop:file { read };

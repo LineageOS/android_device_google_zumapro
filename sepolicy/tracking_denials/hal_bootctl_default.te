@@ -1,2 +1,0 @@
-# b/312373134
-dontaudit hal_bootctl_default hal_bootctl_default:capability { dac_override };
