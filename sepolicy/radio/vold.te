@@ -1,4 +1,0 @@
-allow vold modem_efs_file:dir rw_dir_perms;
-allow vold modem_userdata_file:dir rw_dir_perms;
-allow vold efs_block_device:blk_file { getattr };
-allow vold modem_userdata_block_device:blk_file { getattr };

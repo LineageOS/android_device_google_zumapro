@@ -1,6 +1,0 @@
-# Define liboemservice_proxy_service.
-type liboemservice_proxy_service, hal_service_type, service_manager_type;
-type hal_vendor_radio_external_service, hal_service_type, protected_service, service_manager_type;
-
-type hal_vendor_modem_logging_service, hal_service_type, protected_service, service_manager_type;
-type hal_vendor_tcpdump_service, hal_service_type, protected_service, service_manager_type;

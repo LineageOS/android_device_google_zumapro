@@ -1,0 +1,27 @@
+type gnssd, domain;
+type gnssd_exec, exec_type, file_type, vendor_file_type;
+
+binder_call(gnssd, hwservicemanager)
+binder_call(gnssd, rild)
+binder_call(gnssd, servicemanager)
+
+get_prop(gnssd, bootanim_system_prop)
+get_prop(gnssd, vendor_rild_prop)
+
+init_daemon_domain(gnssd)
+
+net_domain(gnssd)
+
+set_prop(gnssd, vendor_gps_prop)
+
+wakelock_use(gnssd)
+
+allow gnssd hal_exynos_rild_hwservice:hwservice_manager find;
+allow gnssd hal_vendor_radio_external_service:service_manager find;
+allow gnssd radio_device:chr_file rw_file_perms;
+allow gnssd sysfs_gps:file rw_file_perms;
+allow gnssd sysfs_modem_state:file r_file_perms;
+allow gnssd sysfs_soc:file r_file_perms;
+allow gnssd vendor_gnss_device:chr_file rw_file_perms;
+allow gnssd vendor_gps_file:dir create_dir_perms;
+allow gnssd vendor_gps_file:{ fifo_file file } create_file_perms;

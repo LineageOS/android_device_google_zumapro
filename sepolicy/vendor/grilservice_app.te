@@ -1,0 +1,35 @@
+type grilservice_app, domain;
+
+app_domain(grilservice_app)
+
+binder_call(grilservice_app, hal_audiometricext_default)
+binder_call(grilservice_app, hal_bluetooth_btlinux)
+binder_call(grilservice_app, hal_wifi_ext)
+binder_call(grilservice_app, rild)
+binder_call(grilservice_app, twoshay)
+
+get_prop(grilservice_app, telephony_modemtype_prop)
+
+hal_client_domain(grilservice_app, hal_power_stats)
+
+set_prop(grilservice_app, vendor_logger_prop)
+set_prop(grilservice_app, vendor_modem_prop)
+
+allow grilservice_app app_api_service:service_manager find;
+allow grilservice_app gril_antenna_tuning_service:service_manager find;
+allow grilservice_app hal_audiometricext_hwservice:hwservice_manager find;
+allow grilservice_app hal_bluetooth_coexistence_hwservice:hwservice_manager find;
+allow grilservice_app hal_bluetooth_coexistence_service:service_manager find;
+allow grilservice_app hal_exynos_rild_hwservice:hwservice_manager find;
+allow grilservice_app hal_radio_ext_service:service_manager find;
+allow grilservice_app hal_radioext_hwservice:hwservice_manager find;
+allow grilservice_app hal_vendor_radio_external_service:service_manager find;
+allow grilservice_app hal_wifi_ext_hwservice:hwservice_manager find;
+allow grilservice_app hal_wifi_ext_service:service_manager find;
+allow grilservice_app radio_vendor_data_file:dir create_dir_perms;
+allow grilservice_app radio_vendor_data_file:file create_file_perms;
+allow grilservice_app sysfs_irq:dir r_dir_perms;
+allow grilservice_app sysfs_irq:file r_file_perms;
+
+dontaudit grilservice_app default_android_service:service_manager find;
+dontaudit grilservice_app hal_bluetooth_coexistence_service:service_manager find;

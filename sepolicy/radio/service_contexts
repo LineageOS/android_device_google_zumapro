@@ -1,5 +1,0 @@
-# DMD oemservice aidl proxy.
-com.google.pixel.modem.logmasklibrary.ILiboemserviceProxy/default u:object_r:liboemservice_proxy_service:s0
-vendor.samsung_slsi.telephony.hardware.radioExternal.IOemSlsiRadioExternal/default      u:object_r:hal_vendor_radio_external_service:s0
-vendor.samsung_slsi.telephony.hardware.oemservice.IOemService/dm0      u:object_r:hal_vendor_modem_logging_service:s0
-vendor.samsung_slsi.telephony.hardware.oemservice.IOemService/dm1      u:object_r:hal_vendor_modem_logging_service:s0

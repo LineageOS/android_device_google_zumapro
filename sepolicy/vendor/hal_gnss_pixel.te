@@ -1,4 +1,21 @@
 type hal_gnss_pixel, domain;
-init_daemon_domain(hal_gnss_pixel)
-type hal_gnss_pixel_exec, exec_type, vendor_file_type, file_type;
+type hal_gnss_pixel_exec, exec_type, file_type, vendor_file_type;
+
+binder_call(hal_gnss_pixel, hal_contexthub_default)
+binder_call(hal_gnss_pixel, hal_gnss_default)
+
+get_prop(hal_gnss_pixel, vendor_chre_hal_prop)
+get_prop(hal_gnss_pixel, vendor_gps_prop)
+
 hal_server_domain(hal_gnss_pixel, hal_gnss)
+
+init_daemon_domain(hal_gnss_pixel)
+
+allow hal_gnss_pixel fwk_stats_service:service_manager find;
+allow hal_gnss_pixel hal_contexthub_service:service_manager find;
+allow hal_gnss_pixel sscoredump_vendor_data_crashinfo_file:dir r_dir_perms;
+allow hal_gnss_pixel sscoredump_vendor_data_crashinfo_file:file r_file_perms;
+allow hal_gnss_pixel sysfs_gps:file rw_file_perms;
+allow hal_gnss_pixel sysfs_modem_state:file r_file_perms;
+allow hal_gnss_pixel vendor_gps_file:dir create_dir_perms;
+allow hal_gnss_pixel vendor_gps_file:{ fifo_file file } create_file_perms;

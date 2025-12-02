@@ -1,0 +1,3 @@
+binder_call(gmscore_app, hal_aam)
+
+allow gmscore_app hal_aam_service:service_manager find;

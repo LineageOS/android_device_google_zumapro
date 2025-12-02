@@ -1,8 +1,0 @@
-type vendor_satellite_service, domain;
-
-app_domain(vendor_satellite_service);
-allow vendor_satellite_service app_api_service:service_manager find;
-allow vendor_satellite_service hal_exynos_rild_hwservice:hwservice_manager find;
-binder_call(vendor_satellite_service, rild)
-allow vendor_satellite_service hal_vendor_radio_external_service:service_manager find;
-binder_call(vendor_satellite_service, servicemanager)

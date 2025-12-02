@@ -1,2 +1,0 @@
-# Allow context hub HAL to communicate with daemon via socket
-unix_socket_connect(hal_contexthub_default, chre, chre)

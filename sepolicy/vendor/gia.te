@@ -1,0 +1,18 @@
+type gia, domain;
+type gia_exec, exec_type, file_type, vendor_file_type;
+
+binder_call(gia, stats_service_server)
+
+binder_use(gia)
+
+hal_attribute(gia)
+
+hal_client_domain(gia, hal_gia)
+
+hal_server_domain(gia, hal_gia)
+
+init_daemon_domain(gia)
+
+allow gia fwk_stats_service:service_manager find;
+allow gia sysfs_touch_gti:dir r_dir_perms;
+allow gia sysfs_touch_gti:file rw_file_perms;

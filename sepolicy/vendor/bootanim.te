@@ -1,2 +1,3 @@
 allow bootanim arm_mali_platform_service:service_manager find;
-dontaudit bootanim system_data_file:dir { search };
+
+dontaudit bootanim system_data_file:dir search;
