@@ -1,7 +1,20 @@
-type hal_pixel_display_service, service_manager_type, hal_service_type;
-type hal_uwb_vendor_service, service_manager_type, hal_service_type;
-
-# WLC
-type hal_wireless_charger_service, hal_service_type, protected_service, service_manager_type;
-
-type modemml_tflite_service, system_server_service, service_manager_type;
+type arm_mali_platform_service, app_api_service, service_manager_type;
+type eco_service, service_manager_type;
+type edgetpu_nnapi_service, app_api_service, isolated_compute_allowed_service, service_manager_type;
+type gril_antenna_tuning_service, hal_service_type, service_manager_type;
+type hal_audio_ext_service, hal_service_type, service_manager_type;
+type hal_battery_mitigation_service, hal_service_type, service_manager_type;
+type hal_bluetooth_coexistence_service, hal_service_type, pixel_bluetooth_service_type, service_manager_type;
+type hal_fingerprint_debug_service, hal_service_type, protected_service, service_manager_type;
+type hal_pixel_display_service, hal_service_type, service_manager_type;
+type hal_pixel_remote_camera_service, hal_service_type, protected_service, service_manager_type;
+type hal_ril_ext_service, hal_service_type, service_manager_type;
+type hal_vendor_modem_logging_service, hal_service_type, protected_service, service_manager_type;
+type hal_vendor_radio_external_service, hal_service_type, protected_service, service_manager_type;
+type modemml_tflite_service, service_manager_type, system_server_service;
+type screen_protector_detector_service, hal_service_type, service_manager_type;
+type touch_context_service, hal_service_type, service_manager_type;
+type twoshay_file_dump_service, hal_service_type, service_manager_type;
+type twoshay_notification_service, hal_service_type, service_manager_type;
+type vendor_displaycolor_service, vndservice_manager_type;
+type vendor_image_processing_hal_service, hal_service_type, protected_service, service_manager_type;

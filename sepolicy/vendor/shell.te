@@ -1,0 +1,2 @@
+dontaudit shell sysfs:file getattr;
+dontaudit shell sysfs_wlc:dir search;

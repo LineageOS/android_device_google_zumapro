@@ -1,0 +1,16 @@
+binder_call(radio, hal_audio_default)
+binder_call(radio, servicemanager)
+
+get_prop(radio, telephony_ntn_demo_mode_prop)
+
+set_prop(radio, telephony_modemtype_prop)
+set_prop(radio, telephony_ril_prop)
+
+allow radio aoc_device:chr_file rw_file_perms;
+allow radio hal_audio_ext_service:service_manager find;
+allow radio hal_exynos_rild_hwservice:hwservice_manager find;
+allow radio hal_vendor_radio_external_service:service_manager find;
+allow radio radio_vendor_data_file:dir rw_dir_perms;
+allow radio radio_vendor_data_file:file create_file_perms;
+allow radio scheduling_policy_service:service_manager find;
+allow radio vendor_ims_app:udp_socket { getattr read setopt shutdown write };

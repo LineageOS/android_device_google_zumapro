@@ -1,2 +1,0 @@
-# b/308381279
-dontaudit shell sysfs:file { getattr };

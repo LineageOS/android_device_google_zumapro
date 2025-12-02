@@ -232,7 +232,26 @@ $(error system_dlkm.modules.load not found or empty)
 endif
 BOARD_SYSTEM_KERNEL_MODULES := $(addprefix $(KERNEL_MODULE_DIR)/, $(notdir $(BOARD_SYSTEM_KERNEL_MODULES_LOAD)))
 
-include device/google/zumapro/sepolicy/zumapro-sepolicy.mk
+# SEPolicy
+BOARD_VENDOR_SEPOLICY_DIRS += \
+    hardware/google/pixel-sepolicy/googlebattery \
+    hardware/google/pixel-sepolicy/input \
+    hardware/google/pixel-sepolicy/powerstats \
+    device/google/zumapro/sepolicy/certificates \
+    device/google/zumapro/sepolicy/recovery \
+    device/google/zumapro/sepolicy/vendor
+
+PRODUCT_PRIVATE_SEPOLICY_DIRS += \
+    device/google/zumapro/sepolicy/product/private
+
+PRODUCT_PUBLIC_SEPOLICY_DIRS += \
+    device/google/zumapro/sepolicy/product/public
+
+SYSTEM_EXT_PRIVATE_SEPOLICY_DIRS += \
+    device/google/zumapro/sepolicy/system_ext/private
+
+SYSTEM_EXT_PUBLIC_SEPOLICY_DIRS += \
+    device/google/zumapro/sepolicy/system_ext/public
 
 # Battery options
 BOARD_KERNEL_CMDLINE += at24.write_timeout=100

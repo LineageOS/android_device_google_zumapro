@@ -1,7 +1,0 @@
-type hal_wireless_charger, domain;
-type hal_wireless_charger_exec, exec_type, vendor_file_type, file_type;
-
-allow hal_wireless_charger dumpstate:fd use;
-allow hal_wireless_charger dumpstate:fifo_file rw_file_perms;
-
-binder_call(hal_wireless_charger, systemui_app)

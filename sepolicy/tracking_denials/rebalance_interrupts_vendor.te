@@ -1,2 +1,0 @@
-# b/308381263
-dontaudit rebalance_interrupts_vendor rebalance_interrupts_vendor:capability { dac_override };

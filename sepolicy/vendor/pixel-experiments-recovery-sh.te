@@ -1,0 +1,8 @@
+type pixel-experiments-recovery-sh, domain;
+type pixel-experiments-recovery-sh_exec, exec_type, file_type, vendor_file_type;
+
+init_daemon_domain(pixel-experiments-recovery-sh)
+
+set_prop(pixel-experiments-recovery-sh, vendor_perf_allow_experiments_prop)
+
+allow pixel-experiments-recovery-sh vendor_toolbox_exec:file execute_no_trans;
