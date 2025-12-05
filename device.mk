@@ -158,9 +158,6 @@ PRODUCT_SYSTEM_PROPERTIES += \
 PRODUCT_PROPERTY_OVERRIDES += \
 	persist.sys.hdcp_checking=drm-only
 
-# Pixel Logger
-include hardware/google/pixel/PixelLogger/PixelLogger.mk
-
 # Vendor modem extensive logging default property
 PRODUCT_PROPERTY_OVERRIDES += \
 	persist.vendor.modem.extensive_logging_enabled=false
