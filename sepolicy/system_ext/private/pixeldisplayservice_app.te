@@ -1,4 +1,4 @@
-type pixeldisplayservice_app, coredomain, domain;
+typeattribute pixeldisplayservice_app coredomain;
 
 app_domain(pixeldisplayservice_app)
 
