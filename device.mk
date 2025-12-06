@@ -15,9 +15,6 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/developer_gsi_keys.mk)
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.software.ipsec_tunnel_migration.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.software.ipsec_tunnel_migration.xml
 
-DEVICE_PRODUCT_COMPATIBILITY_MATRIX_FILE += \
-    device/google/gs-common/vintf/framework_compatibility_matrix.xml
-
 # sscoredump
 PRODUCT_PROPERTY_OVERRIDES += vendor.debug.ssrdump.type=sscoredump
 
@@ -168,9 +165,6 @@ include hardware/google/pixel/PixelLogger/PixelLogger.mk
 PRODUCT_PROPERTY_OVERRIDES += \
 	persist.vendor.modem.extensive_logging_enabled=false
 
-# Shared Modem Platform
-DEVICE_PRODUCT_COMPATIBILITY_MATRIX_FILE += device/google/gs-common/modem/modem_svc_sit/compatibility_matrix.xml
-
 # HWUI
 TARGET_USES_VULKAN = true
 
@@ -219,30 +213,24 @@ PRODUCT_VENDOR_PROPERTIES += \
 
 PRODUCT_SHIPPING_API_LEVEL := $(SHIPPING_API_LEVEL)
 
-# Device Manifest, Device Compatibility Matrix for Treble
-#
-# Install product specific framework compatibility matrix
-# (TODO: b/169535506) This includes the FCM for system_ext and product partition.
-# It must be split into the FCM of each partition.
+# VINTF
+DEVICE_FRAMEWORK_COMPATIBILITY_MATRIX_FILE += \
+    device/google/zumapro/vintf/vendor_framework_compatibility_matrix.xml
 ifeq ($(PRODUCT_SHIPPING_API_LEVEL),35)
-DEVICE_MANIFEST_FILE := \
-	device/google/zumapro/manifest_202404.xml
-DEVICE_PRODUCT_COMPATIBILITY_MATRIX_FILE += device/google/zumapro/device_framework_matrix_product_202404.xml
-DEVICE_MATRIX_FILE := \
-	device/google/zumapro/compatibility_matrix_202404.xml
-else
-DEVICE_MANIFEST_FILE := \
-	device/google/zumapro/manifest.xml
-DEVICE_PRODUCT_COMPATIBILITY_MATRIX_FILE += device/google/zumapro/device_framework_matrix_product_8.xml
-DEVICE_MATRIX_FILE := \
-	device/google/zumapro/compatibility_matrix.xml
-endif
-
 DEVICE_MANIFEST_FILE += \
-	device/google/zumapro/manifest_media.xml
-
+    device/google/zumapro/vintf/manifest_202404.xml
+DEVICE_MATRIX_FILE += \
+    device/google/zumapro/vintf/compatibility_matrix_202404.xml
 DEVICE_PRODUCT_COMPATIBILITY_MATRIX_FILE += \
-    device/google/zumapro/location/device_framework_matrix_product.xml
+    device/google/zumapro/vintf/device_framework_matrix_product_202404.xml
+else
+DEVICE_MANIFEST_FILE += \
+    device/google/zumapro/vintf/manifest.xml
+DEVICE_MATRIX_FILE += \
+    device/google/zumapro/vintf/compatibility_matrix.xml
+DEVICE_PRODUCT_COMPATIBILITY_MATRIX_FILE += \
+    device/google/zumapro/vintf/device_framework_matrix_product.xml
+endif
 
 DEVICE_PACKAGE_OVERLAYS += device/google/zumapro/overlay
 DEVICE_PACKAGE_OVERLAYS += device/google/zumapro/overlay-lineage
@@ -382,12 +370,6 @@ PRODUCT_PROPERTY_OVERRIDES += audio.spatializer.effect.util_clamp_min=300
 PRODUCT_SOONG_NAMESPACES += \
     hardware/google/camera
 
-DEVICE_PRODUCT_COMPATIBILITY_MATRIX_FILE += \
-    device/google/gs-common/camera/device_framework_matrix_product.xml
-
-DEVICE_MATRIX_FILE += \
-    device/google/gs-common/camera/compatibility_matrix.xml
-
 # Connectivity
 PRODUCT_PACKAGES += \
         ConnectivityOverlay
@@ -399,8 +381,6 @@ PRODUCT_PACKAGES += \
 # Battery Mitigation
 PRODUCT_PROPERTY_OVERRIDES += \
     vendor.battery_mitigation.aidl.enable=true
-
-DEVICE_PRODUCT_COMPATIBILITY_MATRIX_FILE += device/google/gs-common/battery_mitigation/compatibility_matrix.xml
 
 # storage pixelstats
 -include hardware/google/pixel/pixelstats/device.mk
@@ -582,9 +562,7 @@ PRODUCT_PACKAGES += \
 	android.hardware.health-service.zumapro \
 	android.hardware.health-service.zumapro_recovery \
 
-# Audio HAL Server & Default Implementations
-DEVICE_MANIFEST_FILE += device/google/gs-common/audio/aidl/manifest.xml
-
+# Audio
 PRODUCT_PACKAGES += \
     libvisualizeraidl \
     libbundleaidl \
@@ -593,8 +571,6 @@ PRODUCT_PACKAGES += \
     libloudnessenhanceraidl \
     libdownmixaidl \
     libhapticgeneratoraidl
-
-DEVICE_PRODUCT_COMPATIBILITY_MATRIX_FILE += device/google/gs-common/audio/aidl/device_framework_matrix_product.xml
 
 PRODUCT_PROPERTY_OVERRIDES += \
     vendor.audio_hal.aidl.enable=true
@@ -686,18 +662,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 # Hardware Info Collection
 include hardware/google/pixel/HardwareInfo/HardwareInfo.mk
-
-# RIL extension service
-DEVICE_MANIFEST_FILE += device/google/gs-common/pixel_ril/manifest_ril_ds.xml
-DEVICE_PRODUCT_COMPATIBILITY_MATRIX_FILE += device/google/gs-common/pixel_ril/compatibility_matrix.xml
-
-# Touch service
-DEVICE_MANIFEST_FILE += device/google/gs-common/touch/twoshay/aidl/manifest_zuma.xml
-DEVICE_PRODUCT_COMPATIBILITY_MATRIX_FILE += device/google/gs-common/touch/twoshay/aidl/compatibility_matrix_zuma.xml
-
-# GIA
-DEVICE_MANIFEST_FILE += device/google/gs-common/input/gia/aidl/manifest.xml
-DEVICE_PRODUCT_COMPATIBILITY_MATRIX_FILE += device/google/gs-common/input/gia/aidl/compatibility_matrix.xml
 
 PRODUCT_CHECK_VENDOR_SEAPP_VIOLATIONS := true
 
