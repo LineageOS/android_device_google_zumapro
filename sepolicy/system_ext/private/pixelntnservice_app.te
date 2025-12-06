@@ -1,4 +1,4 @@
-type pixelntnservice_app, coredomain, domain;
+typeattribute pixelntnservice_app coredomain;
 
 app_domain(pixelntnservice_app)
 

@@ -322,7 +322,6 @@
 /vendor/bin/hw/android\.hardware\.usb-service u:object_r:hal_usb_impl_exec:s0
 /vendor/bin/hw/android\.hardware\.usb\.gadget-service u:object_r:hal_usb_gadget_impl_exec:s0
 /vendor/bin/hw/battery_mitigation u:object_r:battery_mitigation_exec:s0
-/vendor/bin/hw/citadel_updater u:object_r:citadel_updater:s0
 /vendor/bin/hw/com\.google\.edgetpu.dba-service u:object_r:edgetpu_dba_server_exec:s0
 /vendor/bin/hw/com\.google\.edgetpu.tachyon-service u:object_r:edgetpu_tachyon_server_exec:s0
 /vendor/bin/hw/disable_contaminant_detection\.sh u:object_r:disable-contaminant-detection-sh_exec:s0
@@ -340,7 +339,6 @@
 /vendor/bin/hw/vendor\.google\.wireless_charger-default u:object_r:hal_wireless_charger_exec:s0
 /vendor/bin/hw/vendor\.google\.wireless_charger\.service-default u:object_r:hal_wlcservice_exec:s0
 /vendor/bin/init\.camera\.set-interrupts-ownership u:object_r:init-camera-set-interrupts-ownership_exec:s0
-/vendor/bin/init\.qfp\.sh u:object_r:init_qfp_exec:s0
 /vendor/bin/init\.radio\.sh u:object_r:init_radio_exec:s0
 /vendor/bin/init_uwb_calib u:object_r:vendor_uwb_init_exec:s0
 /vendor/bin/insmod\.sh u:object_r:insmod-sh_exec:s0
