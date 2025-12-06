@@ -699,6 +699,10 @@ PRODUCT_VENDOR_LINKER_CONFIG_FRAGMENTS += \
 PRODUCT_PACKAGES += \
     GoogleParts
 
+# Properties
+TARGET_PRODUCT_PROP += device/google/zumapro/product.prop
+TARGET_SYSTEM_PROP += device/google/zumapro/system.prop
+
 # Tethering
 PRODUCT_PACKAGES += \
     TetheringOverlay
