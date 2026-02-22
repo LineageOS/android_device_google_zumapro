@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <string-array name="config_nightDisplayColorTemperatureCoefficients">
+        <item>0.0</item>
+        <item>0.0</item>
+        <item>1.0</item>
+        <item>-0.000000014365268757</item>
+        <item>0.000255092801250106</item>
+        <item>-0.064156942434907716</item>
+        <item>-0.000000000910931179</item>
+        <item>0.000207598323269139</item>
+        <item>-0.349361641294833436</item>
+    </string-array>
+
+    <!-- User activity timeout: Screen timeout override in milliseconds.
+
+         This value must be greater than 0, otherwise the invalid value will not apply to
+         the screen timeout override policy.
+    -->
+    <integer name="config_screenTimeoutOverride">10000</integer>
+
+    <!-- The fixed keyboard vibration strength in [0,1], or -1 to indicate the strength not fixed
+         and should depend on the touch feedback intensity user setting -->
+    <item name="config_keyboardHapticFeedbackFixedAmplitude" format="float" type="dimen">0.62</item>
+
+    <!-- Indicating if keyboard vibration settings supported or not. -->
+    <bool name="config_keyboardVibrationSettingsSupported">true</bool>
+
+    <!-- Indicating if ringtone vibration settings supported or not. -->
+    <bool name="config_ringtoneVibrationSettingsSupported">true</bool>
+
+    <!-- External display peak refresh rate for the given device. Change this value if you want to
+         prevent the framework from using higher refresh rates, even if display modes with higher
+         refresh rates are available from hardware composer. Only has an effect if this value and
+         config_externalDisplayPeakWidth and config_externalDisplayPeakHeight are non-zero. -->
+    <integer name="config_externalDisplayPeakRefreshRate">61</integer>
+
+    <!-- External display peak width for the given device. Change this value if you want
+         to prevent the framework from using higher resolution, even if display modes with higher
+         resolutions are available from hardware composer. Only has an effect if this value and
+         config_externalDisplayPeakRefreshRate and config_externalDisplayPeakHeight are non-zero.-->
+    <integer name="config_externalDisplayPeakWidth">1920</integer>
+
+    <!-- External display peak height for the given device. Change this value if you want
+         to prevent the framework from using higher resolution, even if display modes with higher
+         resolutions are available from hardware composer. Only has an effect if this value and
+         config_externalDisplayPeakRefreshRate and config_externalDisplayPeakWidth are non-zero. -->
+    <integer name="config_externalDisplayPeakHeight">1080</integer>
+
+    <!-- Enable synchronization of the displays refresh rates by applying the default low refresh
+         rate. -->
+    <bool name="config_refreshRateSynchronizationEnabled">true</bool>
+</resources>

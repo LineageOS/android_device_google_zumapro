@@ -221,9 +221,6 @@ DEVICE_PRODUCT_COMPATIBILITY_MATRIX_FILE += \
     device/google/zumapro/vintf/device_framework_matrix_product.xml
 endif
 
-DEVICE_PACKAGE_OVERLAYS += device/google/zumapro/overlay
-DEVICE_PACKAGE_OVERLAYS += device/google/zumapro/overlay-lineage
-
 # Enforce the Product interface
 PRODUCT_PRODUCT_VNDK_VERSION := current
 PRODUCT_ENFORCE_PRODUCT_PARTITION_INTERFACE := true
@@ -358,10 +355,6 @@ PRODUCT_PROPERTY_OVERRIDES += audio.spatializer.effect.util_clamp_min=300
 # Camera
 PRODUCT_SOONG_NAMESPACES += \
     hardware/google/camera
-
-# Connectivity
-PRODUCT_PACKAGES += \
-        ConnectivityOverlay
 
 # Storage health HAL
 PRODUCT_PACKAGES += \
@@ -689,6 +682,42 @@ $(call soong_config_set_bool,lineage_health,charging_control_supports_toggle,fal
 PRODUCT_VENDOR_LINKER_CONFIG_FRAGMENTS += \
     device/google/zumapro/linker.config.json
 
+# Overlays
+DEVICE_PACKAGE_OVERLAYS += \
+    device/google/zumapro/overlay-lineage
+
+PRODUCT_PACKAGES += \
+    DMServiceOverlayProductZumapro \
+    EuiccSupportPixelOverlay \
+    FrameworkResOverlayProductZumapro \
+    FrameworkResOverlayVendorZumapro \
+    GlanceableHubConfigOverlay \
+    GlanceableHubSettingsConfigOverlay \
+    GlanceableHubSettingsConfigOverlay2022 \
+    GlanceableHubSysuiConfigOverlay \
+    GoogleConfigOverlay \
+    GooglePermissionControllerSafetyCenterOverlay \
+    PixelConfigOverlay2019 \
+    PixelConfigOverlay2021 \
+    PixelConfigOverlayCommon \
+    PixelConnectivityOverlay2024 \
+    PixelDisplayServiceOverlayProductZumapro \
+    PixelNfcOverlayCommon \
+    PixelTetheringOverlay2021 \
+    PixelWifiOverlay2024_M25 \
+    SafetyRegulatoryInfoOverlayProductZumapro \
+    SettingsGoogleOverlayProductZumapro \
+    SettingsGoogleOverlayVendorZumapro \
+    SettingsProviderOverlayProductZumapro \
+    SettingsProviderOverlayVendorZumapro \
+    ShannonImsOverlayProductZumapro \
+    SystemUIGoogleOverlayProductZumapro \
+    SystemUIGoogleOverlayVendorZumapro \
+    TeleServiceOverlayProductZumapro \
+    TeleServiceOverlayVendorZumapro \
+    TelecomOverlayProductZumapro \
+    TelephonyProviderOverlayProductZumapro
+
 # Parts
 PRODUCT_PACKAGES += \
     GoogleParts
@@ -696,10 +725,6 @@ PRODUCT_PACKAGES += \
 # Properties
 TARGET_PRODUCT_PROP += device/google/zumapro/product.prop
 TARGET_SYSTEM_EXT_PROP += device/google/zumapro/system_ext.prop
-
-# Tethering
-PRODUCT_PACKAGES += \
-    TetheringOverlay
 
 # Touch
 include hardware/google/pixel/touch/device.mk

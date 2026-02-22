@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- Height of the status bar in landscape.
+         Do not read this dimen directly. Use {@link SystemBarUtils#getStatusBarHeight} instead.
+         -->
+    <dimen name="status_bar_height_landscape">24dp</dimen>
+
+    <!-- Top adjustment for the software rounded corners since corners are not perfectly
+        round.  This value is used when retrieving the "radius" of the top rounded corner in cases
+        where the exact bezier curve cannot be retrieved.  This value will be subtracted from
+        rounded_corner_radius_top to more accurately provide a "radius" for the top rounded corners.
+         -->
+    <dimen name="rounded_corner_radius_top_adjustment">5px</dimen>
+
+    <!-- Bottom adjustment for the software rounded corners since corners are not perfectly
+        round.  This value is used when retrieving the "radius" of the bottom rounded corner in
+        cases where the exact bezier curve cannot be retrieved.  This value will be subtracted from
+        rounded_corner_radius_bottom to more accurately provide a "radius" for the bottom rounded
+        corners. -->
+    <dimen name="rounded_corner_radius_bottom_adjustment">4px</dimen>
+
+    <!-- Default paddings for content around the corners. -->
+    <dimen name="rounded_corner_content_padding">70px</dimen>
+</resources>
