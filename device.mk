@@ -756,6 +756,10 @@ PRODUCT_PACKAGES += \
     TelecomOverlayProductZumapro \
     TelephonyProviderOverlayProductZumapro
 
+PRODUCT_PACKAGES += \
+    LineageSdkOverlayZumapro \
+    SettingsOverlayZumapro
+
 # Parts
 PRODUCT_PACKAGES += \
     GoogleParts
