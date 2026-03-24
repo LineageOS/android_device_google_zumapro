@@ -266,10 +266,6 @@ PRODUCT_COPY_FILES += \
 	device/google/zumapro/component-overrides.xml:$(TARGET_COPY_OUT_VENDOR)/etc/sysconfig/component-overrides.xml \
 	frameworks/native/data/etc/handheld_core_hardware.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/handheld_core_hardware.xml \
 
-PRODUCT_PACKAGES += \
-	android.hardware.health-service.zumapro \
-	android.hardware.health-service.zumapro_recovery \
-
 # Audio
 PRODUCT_PACKAGES += \
     libvisualizeraidl \
