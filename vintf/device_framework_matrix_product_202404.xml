@@ -33,6 +33,13 @@
         </interface>
     </hal>
     <hal format="aidl">
+        <name>android.hardware.security.timestamp</name>
+        <interface>
+            <name>ITimeStamper</name>
+            <instance>default</instance>
+        </interface>
+    </hal>
+    <hal format="aidl">
         <name>android.hardware.vibrator</name>
         <version>2-3</version>
         <interface>
@@ -89,6 +96,13 @@
         </interface>
     </hal>
     <hal format="aidl">
+        <name>com.google.android.moseyservice</name>
+        <interface>
+            <name>IMoseyService</name>
+            <instance>default</instance>
+        </interface>
+    </hal>
+    <hal format="aidl">
         <name>com.google.edgetpu</name>
         <version>2</version>
         <interface>
@@ -125,7 +139,7 @@
     </hal>
     <hal format="aidl">
         <name>com.google.hardware.pixel.display</name>
-        <version>17</version>
+        <version>21</version>
         <interface>
             <name>IDisplay</name>
             <instance>default</instance>
@@ -133,7 +147,7 @@
     </hal>
     <hal format="aidl">
         <name>com.google.input</name>
-        <version>2-6</version>
+        <version>2-8</version>
         <interface>
             <name>ITouchContextService</name>
             <instance>default</instance>
@@ -141,7 +155,7 @@
     </hal>
     <hal format="aidl">
         <name>com.google.input</name>
-        <version>5-6</version>
+        <version>5-8</version>
         <interface>
             <name>ITwoshayNotificationService</name>
             <instance>default</instance>
@@ -149,7 +163,7 @@
     </hal>
     <hal format="aidl">
         <name>com.google.input</name>
-        <version>6</version>
+        <version>6-8</version>
         <interface>
             <name>ITwoshayFileDumpService</name>
             <instance>touchflow_default</instance>
@@ -159,7 +173,7 @@
     </hal>
     <hal format="aidl">
         <name>com.google.input.algos.gril</name>
-        <version>2-6</version>
+        <version>2-8</version>
         <interface>
             <name>IGrilAntennaTuningService</name>
             <instance>default</instance>
@@ -167,10 +181,19 @@
     </hal>
     <hal format="aidl">
         <name>com.google.input.algos.spd</name>
-        <version>2-6</version>
+        <version>2-8</version>
         <interface>
             <name>IScreenProtectorDetectorService</name>
             <instance>default</instance>
+        </interface>
+    </hal>
+    <hal format="aidl">
+        <name>com.google.input.algos.touchflow</name>
+        <version>7-8</version>
+        <interface>
+            <name>ITouchflowLoggerService</name>
+            <instance>default_touchflow</instance>
+            <instance>outer_touchflow</instance>
         </interface>
     </hal>
     <hal format="aidl">
@@ -205,6 +228,7 @@
     </hal>
     <hal format="aidl">
         <name>hardware.google.ril_ext</name>
+        <version>1-2</version>
         <interface>
             <name>IRilExt</name>
             <instance>slot1</instance>
@@ -243,7 +267,7 @@
     </hal>
     <hal format="aidl">
         <name>vendor.google.bluetooth_ext</name>
-        <version>1-3</version>
+        <version>1-4</version>
         <interface>
             <name>IBTChannelAvoidance</name>
             <instance>default</instance>
@@ -275,9 +299,27 @@
     </hal>
     <hal format="aidl">
         <name>vendor.google.google_battery</name>
-        <version>4</version>
+        <version>4-5</version>
         <interface>
             <name>IGoogleBattery</name>
+            <instance>default</instance>
+        </interface>
+    </hal>
+    <hal format="aidl">
+        <name>vendor.google.hardware.biometrics.face</name>
+        <interface>
+            <name>IFaceExt</name>
+            <instance>default</instance>
+        </interface>
+    </hal>
+    <hal format="aidl">
+        <name>vendor.google.plat_security</name>
+        <interface>
+            <name>ISecureTimestamp</name>
+            <instance>default</instance>
+        </interface>
+        <interface>
+            <name>ITrustyDecrypt</name>
             <instance>default</instance>
         </interface>
     </hal>
@@ -291,7 +333,7 @@
     </hal>
     <hal format="aidl">
         <name>vendor.google.whitechapel.audio.extension</name>
-        <version>6</version>
+        <version>7-8</version>
         <interface>
             <name>IAudioExtension</name>
             <instance>default</instance>
@@ -299,7 +341,7 @@
     </hal>
     <hal format="aidl">
         <name>vendor.google.wifi_ext</name>
-        <version>2-4</version>
+        <version>2-5</version>
         <interface>
             <name>IWifiExt</name>
             <instance>default</instance>
@@ -307,7 +349,7 @@
     </hal>
     <hal format="aidl">
         <name>vendor.google.wireless_charger</name>
-        <version>1-5</version>
+        <version>6-7</version>
         <interface>
             <name>IWirelessCharger</name>
             <instance>default</instance>
@@ -315,7 +357,7 @@
     </hal>
     <hal format="aidl">
         <name>vendor.google.wireless_charger.service</name>
-        <version>1-2</version>
+        <version>2</version>
         <interface>
             <name>IWlcService</name>
             <instance>default</instance>

@@ -14,7 +14,12 @@
         <fqname>IBluetoothFinder/default</fqname>
     </hal>
     <hal format="aidl">
+        <name>android.hardware.bluetooth.lmp_event</name>
+        <fqname>IBluetoothLmpEvent/default</fqname>
+    </hal>
+    <hal format="aidl">
         <name>android.hardware.bluetooth.ranging</name>
+        <version>2</version>
         <fqname>IBluetoothChannelSounding/default</fqname>
     </hal>
     <hal format="aidl">
@@ -23,38 +28,40 @@
     </hal>
     <hal format="aidl">
         <name>android.hardware.media.c2</name>
+        <version>2</version>
         <fqname>IComponentStore/default1</fqname>
     </hal>
     <hal format="aidl">
         <name>android.hardware.media.c2</name>
+        <version>2</version>
         <fqname>IComponentStore/default</fqname>
     </hal>
     <hal format="aidl">
         <name>android.hardware.radio.config</name>
-        <version>2</version>
+        <version>3</version>
         <fqname>IRadioConfig/default</fqname>
     </hal>
     <hal format="aidl">
         <name>android.hardware.radio.data</name>
-        <version>2</version>
+        <version>3</version>
         <fqname>IRadioData/slot1</fqname>
         <fqname>IRadioData/slot2</fqname>
     </hal>
     <hal format="aidl">
         <name>android.hardware.radio.messaging</name>
-        <version>2</version>
+        <version>3</version>
         <fqname>IRadioMessaging/slot1</fqname>
         <fqname>IRadioMessaging/slot2</fqname>
     </hal>
     <hal format="aidl">
         <name>android.hardware.radio.modem</name>
-        <version>2</version>
+        <version>3</version>
         <fqname>IRadioModem/slot1</fqname>
         <fqname>IRadioModem/slot2</fqname>
     </hal>
     <hal format="aidl">
         <name>android.hardware.radio.network</name>
-        <version>2</version>
+        <version>3</version>
         <fqname>IRadioNetwork/slot1</fqname>
         <fqname>IRadioNetwork/slot2</fqname>
     </hal>
@@ -65,13 +72,13 @@
     </hal>
     <hal format="aidl">
         <name>android.hardware.radio.sim</name>
-        <version>2</version>
+        <version>3</version>
         <fqname>IRadioSim/slot1</fqname>
         <fqname>IRadioSim/slot2</fqname>
     </hal>
     <hal format="aidl">
         <name>android.hardware.radio.voice</name>
-        <version>2</version>
+        <version>3</version>
         <fqname>IRadioVoice/slot1</fqname>
         <fqname>IRadioVoice/slot2</fqname>
     </hal>
@@ -87,28 +94,28 @@
     </hal>
     <hal format="aidl">
         <name>com.google.input</name>
-        <version>6</version>
+        <version>8</version>
         <fqname>ITouchContextService/default</fqname>
     </hal>
     <hal format="aidl">
         <name>com.google.input</name>
-        <version>6</version>
+        <version>8</version>
         <fqname>ITwoshayNotificationService/default</fqname>
     </hal>
     <hal format="aidl">
         <name>com.google.input</name>
-        <version>6</version>
+        <version>8</version>
         <fqname>ITwoshayFileDumpService/touchflow_default</fqname>
         <fqname>ITwoshayFileDumpService/twoshay</fqname>
     </hal>
     <hal format="aidl">
         <name>com.google.input.algos.gril</name>
-        <version>6</version>
+        <version>8</version>
         <fqname>IGrilAntennaTuningService/default</fqname>
     </hal>
     <hal format="aidl">
         <name>com.google.input.algos.spd</name>
-        <version>6</version>
+        <version>8</version>
         <fqname>IScreenProtectorDetectorService/default</fqname>
     </hal>
     <hal format="aidl">
@@ -123,7 +130,7 @@
     </hal>
     <hal format="aidl">
         <name>vendor.google.bluetooth_ext</name>
-        <version>2</version>
+        <version>4</version>
         <fqname>IBTChannelAvoidance/default</fqname>
         <fqname>IBluetoothCcc/default</fqname>
         <fqname>IBluetoothCco/default</fqname>
