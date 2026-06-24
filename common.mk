@@ -394,7 +394,7 @@ PRODUCT_PACKAGES += \
     PixelDisplayServiceOverlayProductZumapro \
     PixelNfcOverlayCommon \
     PixelTetheringOverlay2021 \
-    PixelWifiOverlay2024_M25Zumapro \
+    PixelWifiOverlay2025_M26Zumapro \
     SafetyRegulatoryInfoOverlayProductZumapro \
     SettingsGoogleOverlayProductZumapro \
     SettingsGoogleOverlayVendorZumapro \
@@ -405,7 +405,6 @@ PRODUCT_PACKAGES += \
     SystemUIGoogleOverlayVendorZumapro \
     TeleServiceOverlayProductZumapro \
     TeleServiceOverlayVendorZumapro \
-    TelecomOverlayProductZumapro \
     TelephonyProviderOverlayProductZumapro
 
 PRODUCT_PACKAGES += \

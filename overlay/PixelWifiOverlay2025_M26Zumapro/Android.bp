@@ -4,6 +4,6 @@
 //
 
 runtime_resource_overlay {
-    name: "TelecomOverlayProductZumapro",
+    name: "PixelWifiOverlay2025_M26Zumapro",
     product_specific: true,
 }

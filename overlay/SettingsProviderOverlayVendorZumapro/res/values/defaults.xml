@@ -5,5 +5,5 @@
 -->
 <resources>
     <!-- Comma-separated list of bluetooth, wifi, and cell. -->
-    <string name="def_satellite_mode_radios">bluetooth,nfc,wifi</string>
+    <string name="def_satellite_mode_radios" translatable="false">bluetooth,nfc,wifi</string>
 </resources>

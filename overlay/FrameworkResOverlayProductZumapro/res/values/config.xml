@@ -43,13 +43,13 @@
          to prevent the framework from using higher resolution, even if display modes with higher
          resolutions are available from hardware composer. Only has an effect if this value and
          config_externalDisplayPeakRefreshRate and config_externalDisplayPeakHeight are non-zero.-->
-    <integer name="config_externalDisplayPeakWidth">1920</integer>
+    <integer name="config_externalDisplayPeakWidth">3440</integer>
 
     <!-- External display peak height for the given device. Change this value if you want
          to prevent the framework from using higher resolution, even if display modes with higher
          resolutions are available from hardware composer. Only has an effect if this value and
          config_externalDisplayPeakRefreshRate and config_externalDisplayPeakWidth are non-zero. -->
-    <integer name="config_externalDisplayPeakHeight">1080</integer>
+    <integer name="config_externalDisplayPeakHeight">1600</integer>
 
     <!-- Enable synchronization of the displays refresh rates by applying the default low refresh
          rate. -->

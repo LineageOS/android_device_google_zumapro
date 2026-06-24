@@ -16,23 +16,20 @@
 
     <!-- IWLAN data service package name to bind to by default. If none is specified in an overlay,
          an empty string is passed in -->
-    <string name="config_wlan_data_service_package">com.google.android.iwlan</string>
+    <string name="config_wlan_data_service_package" translatable="false">com.google.android.iwlan</string>
 
     <!-- IWLAN network service package name to bind to by default. If none is specified in an
          overlay, an empty string is passed in -->
-    <string name="config_wlan_network_service_package">com.google.android.iwlan</string>
-
-    <!-- Telephony satellite service package name to bind to by default. -->
-    <string name="config_satellite_service_package">com.google.android.satellite</string>
+    <string name="config_wlan_network_service_package" translatable="false">com.google.android.iwlan</string>
 
     <!-- Telephony satellite gateway service package name to bind to by default. -->
-    <string name="config_satellite_gateway_service_package">com.google.android.apps.stargate</string>
+    <string name="config_satellite_gateway_service_package" translatable="false">com.google.android.apps.stargate</string>
 
     <!-- Telephony pointing UI package name to be launched. -->
-    <string name="config_pointing_ui_package">com.google.android.apps.scone</string>
+    <string name="config_pointing_ui_package" translatable="false">com.google.android.apps.scone</string>
 
     <!-- Telephony pointing UI class name to be launched. -->
-    <string name="config_pointing_ui_class">com.google.android.apps.scone.satellite.pointingui.ui.PointingUiActivity</string>
+    <string name="config_pointing_ui_class" translatable="false">com.google.android.apps.scone.satellite.pointingui.ui.PointingUiActivity</string>
 
     <!-- The time duration in millis after which cellular scanning will be enabled and satellite
          will move to IDLE state. This timeout duration is used for satellite with NB IOT radio
@@ -62,27 +59,27 @@
 
     <!-- The identifier of the satellite's SIM profile. The identifier is composed of MCC and MNC
          of the satellite PLMN with the format "mccmnc". -->
-    <string name="config_satellite_sim_plmn_identifier">90198</string>
+    <string name="config_satellite_sim_plmn_identifier" translatable="false">90198</string>
 
     <!-- The identifier for the satellite's SIM profile. The identifier is the service provider name
     (spn) from the profile metadata. -->
-    <string name="config_satellite_sim_spn_identifier">Skylo</string>
+    <string name="config_satellite_sim_spn_identifier" translatable="false">Skylo</string>
 
     <!-- The app to which the emergency call will be handed over for OEM-enabled satellite
          messaging. The format of the config string is "package_name;class_name". -->
-    <string name="config_oem_enabled_satellite_sos_handover_app">com.google.android.apps.stargate;com.google.android.apps.stargate.questionnaire.QuestionnaireHomeActivity</string>
+    <string name="config_oem_enabled_satellite_sos_handover_app" translatable="false">com.google.android.apps.stargate;com.google.android.apps.stargate.questionnaire.QuestionnaireHomeActivity</string>
 
     <!-- The action of the intent that Dialer sends to the app to which the emergency call will be
          handed over for emergency messaging via satellite. -->
-    <string name="config_satellite_emergency_handover_intent_action">com.google.android.apps.stargate.ACTION_ESOS_QUESTIONNAIRE</string>
+    <string name="config_satellite_emergency_handover_intent_action" translatable="false">com.google.android.apps.stargate.ACTION_ESOS_QUESTIONNAIRE</string>
 
     <!-- The action of the intent that hidden menu sends to the app to launch demo mode for sos
      emergency messaging via satellite. -->
-    <string name="config_satellite_demo_mode_sos_intent_action">com.google.android.apps.stargate.ACTION_ESOS_DEMO</string>
+    <string name="config_satellite_demo_mode_sos_intent_action" translatable="false">com.google.android.apps.stargate.ACTION_ESOS_DEMO</string>
 
     <!-- The action of the intent that hidden menu sends to the app to launch esp loopback test mode
      for sos emergency messaging via satellite. -->
-    <string name="config_satellite_test_with_esp_replies_intent_action">com.google.android.apps.stargate.ACTION_ESOS_QUESTIONNAIRE_TEST_WITH_ESP_REPLIES</string>
+    <string name="config_satellite_test_with_esp_replies_intent_action" translatable="false">com.google.android.apps.stargate.ACTION_ESOS_QUESTIONNAIRE_TEST_WITH_ESP_REPLIES</string>
 
     <!-- Whether the device supports disabling satellite while satellite enabling is in progress.
          -->
@@ -137,19 +134,19 @@
     <bool name="allow_clear_initial_attach_data_profile">true</bool>
 
     <!-- Telephony satellite gateway class name for handling carrier roaming to satellite is using ESOS messaging. -->
-    <string name="config_satellite_carrier_roaming_esos_provisioned_class">com.google.android.apps.stargate.registration.RegistrationReceiver_Receiver</string>
+    <string name="config_satellite_carrier_roaming_esos_provisioned_class" translatable="false">com.google.android.apps.stargate.registration.RegistrationReceiver_Receiver</string>
 
     <!-- The file contains satellite access configuration like supported frequencies, bands,
     satellite positions, and so on -->
-    <string name="satellite_access_config_file">/vendor/etc/telephony/satellite_access_config.json</string>
+    <string name="satellite_access_config_file" translatable="false">/vendor/etc/telephony/satellite_access_config.json</string>
 
     <!-- A string defines the NIDD (Non-IP Data Delivery) APN to be used for satellite attachment. For more on NIDD,
          see 3GPP TS 29.542. This config is used for an NTN-only subscription, which requires activation before being used.
          -->
-    <string name="config_satellite_nidd_apn_name">pixel.ntn</string>
+    <string name="config_satellite_nidd_apn_name" translatable="false">pixel.ntn</string>
 
     <!-- The receiver class of the intent that hidden menu sends to start satellite non-emergency mode -->
-    <string name="config_satellite_carrier_roaming_non_emergency_session_class">com.google.android.apps.stargate.sessionmanager.SessionManagerReceiver_Receiver</string>
+    <string name="config_satellite_carrier_roaming_non_emergency_session_class" translatable="false">com.google.android.apps.stargate.sessionmanager.SessionManagerReceiver_Receiver</string>
 
     <!-- Whether to show the system notification to users whenever there is a change
          in the satellite availability state at the current location. -->
@@ -170,4 +167,7 @@
     <!-- Whether to enable APDU sender optimization i.e. a logical channel is opened and
          kept open for multiple APDU commands within one session.-->
     <bool name="euicc_optimize_apdu_sender">true</bool>
+
+    <!-- Whether to wait for carrier config loaded before using operator name to publish from modem. -->
+    <bool name="config_update_operator_name_after_carrier_config_loaded">true</bool>
 </resources>
