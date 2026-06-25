@@ -22,21 +22,19 @@ BOARD_BOOTCONFIG += \
     androidboot.boot_devices=13200000.ufs
 
 BOARD_KERNEL_CMDLINE += \
-    fips140.load_sequential=1 \
-    vh_sched.load_sequential=1 \
     dyndbg=\"func alloc_contig_dump_pages +p\" \
+    earlycon=exynos4210,0x10870000 \
+    console=ttySAC0,115200 \
+    androidboot.console=ttySAC0 \
+    printk.devkmsg=on \
     cma_sysfs.experimental=Y \
-    cgroup_disable=memory \
     cgroup.memory=nokmem \
-    init_on_alloc=0 \
-    init_on_free=1 \
     rcupdate.rcu_expedited=1 \
     rcu_nocbs=all \
     rcutree.enable_rcu_lazy \
     swiotlb=noforce \
     disable_dma32=on \
     sysctl.kernel.sched_pelt_multiplier=4 \
-    aoc_core.aoc_enable_gsa_boot=1 \
     rodata=on \
     kasan=off \
     at24.write_timeout=100 \
