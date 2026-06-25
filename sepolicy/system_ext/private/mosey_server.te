@@ -1,0 +1,28 @@
+type mosey_server, coredomain, domain, service_manager_type, system_server_service;
+type mosey_server_exec, exec_type, file_type, system_file_type;
+
+add_service(mosey_server, mosey_service)
+
+binder_use(mosey_server)
+
+init_daemon_domain(mosey_server)
+
+r_dir_file(mosey_server, sysfs_net)
+
+allow mosey_server dumpstate:fd use;
+allow mosey_server dumpstate:fifo_file write;
+allow mosey_server mosey_server:netlink_netfilter_socket create;
+allow mosey_server self:capability { net_admin net_raw };
+allow mosey_server self:netlink_generic_socket create_socket_perms;
+allow mosey_server self:netlink_route_socket { create nlmsg_getneigh nlmsg_read nlmsg_readpriv nlmsg_write read write };
+allow mosey_server self:packet_socket create_stream_socket_perms;
+allow mosey_server self:tun_socket create;
+allow mosey_server self:udp_socket { create ioctl };
+allow mosey_server self:unix_dgram_socket ioctl;
+allow mosey_server tun_device:chr_file rw_file_perms;
+
+allowxperm mosey_server self:netlink_generic_socket ioctl SIOCETHTOOL;
+allowxperm mosey_server self:packet_socket ioctl { SIOCGIFFLAGS SIOCGIFHWADDR SIOCGIFINDEX };
+allowxperm mosey_server self:udp_socket ioctl { SIOCGIFFLAGS-SIOCSIFFLAGS SIOCSIFADDR SIOCSIFMTU SIOCSIFHWADDR SIOCDIFADDR SIOCETHTOOL SIOCBONDINFOQUERY SIOCDEVPRIVATE_1 };
+allowxperm mosey_server self:unix_dgram_socket ioctl { SIOCGIFFLAGS-SIOCSIFFLAGS SIOCETHTOOL SIOCBONDINFOQUERY };
+allowxperm mosey_server tun_device:chr_file ioctl { TUNSETIFF TUNGETIFF };

@@ -1,6 +1,11 @@
 app_domain(rilextensionservice_app)
 
+binder_call(rilextensionservice_app, update_engine)
+binder_call(update_engine, rilextensionservice_app)
+
 set_prop(rilextensionservice_app, radio_prop)
+set_prop(rilextensionservice_app, system_ril_ext_prop)
 
 allow rilextensionservice_app app_api_service:service_manager find;
 allow rilextensionservice_app radio_service:service_manager find;
+allow rilextensionservice_app update_engine_service:service_manager find;

@@ -1,5 +1,7 @@
+system_public_prop(system_ril_ext_prop)
 system_public_prop(telephony_modemtype_prop)
 system_public_prop(telephony_ril_prop)
 
+system_restricted_prop(device_config_faceauth_native_prop)
 system_restricted_prop(telephony_modem_prop)
 system_restricted_prop(telephony_ntn_demo_mode_prop)

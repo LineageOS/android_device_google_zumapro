@@ -1,3 +1,4 @@
+user=_app isPrivApp=true name=com.google.android.apps.scone:perfstats_system_internals_process domain=scone_system_internals type=app_data_file levelFrom=all
 user=_app seinfo=CameraServices name=com.google.android.apps.camera.services domain=vendor_pcs_app type=app_data_file levelFrom=all
 user=_app seinfo=CameraServices name=com.google.android.apps.camera.services:* domain=vendor_pcs_app type=app_data_file levelFrom=all
 user=system seinfo=platform name=com.google.pixel.camera.services domain=vendor_pbcs_app type=system_app_data_file levelFrom=all

@@ -12,4 +12,5 @@ allow hal_health_default persist_battery_file:file create_file_perms;
 allow hal_health_default persist_file:dir search;
 allow hal_health_default sysfs_batteryinfo:file rw_file_perms;
 allow hal_health_default sysfs_scsi_devices_0000:file rw_file_perms;
+allow hal_health_default sysfs_typec:dir { open read search };
 allow hal_health_default sysfs_wlc:dir search;

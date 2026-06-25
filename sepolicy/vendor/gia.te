@@ -1,5 +1,9 @@
 type gia, domain;
 type gia_exec, exec_type, file_type, vendor_file_type;
+type gti_ext_status_device, dev_type;
+type proc_touch_gti, fs_type, proc_type;
+type sysfs_touch_gti, fs_type, sysfs_type;
+type vendor_touch_dump_file, data_file_type, file_type;
 
 hal_client_domain(gia, hal_gia)
 
@@ -12,5 +16,10 @@ binder_use(gia)
 init_daemon_domain(gia)
 
 allow gia fwk_stats_service:service_manager find;
+allow gia gti_ext_status_device:chr_file r_file_perms;
+allow gia proc_touch_gti:dir r_dir_perms;
+allow gia proc_touch_gti:file r_file_perms;
 allow gia sysfs_touch_gti:dir r_dir_perms;
 allow gia sysfs_touch_gti:file rw_file_perms;
+allow gia vendor_touch_dump_file:dir rw_dir_perms;
+allow gia vendor_touch_dump_file:file create_file_perms;

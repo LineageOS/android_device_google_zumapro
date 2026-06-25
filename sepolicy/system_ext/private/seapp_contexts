@@ -1,12 +1,21 @@
+user=_app isPrivApp=true name=.ShannonImsService domain=vendor_ims_app levelFrom=all
 user=_app isPrivApp=true name=com.google.android.apps.pixel.dcservice domain=dcservice_app type=privapp_data_file levelFrom=user
 user=_app isPrivApp=true name=com.google.android.apps.pixel.dcservice.ui domain=dcservice_app type=privapp_data_file levelFrom=user
 user=_app isPrivApp=true name=com.google.android.grilservice domain=grilservice_app levelFrom=all
+user=_app isPrivApp=true name=com.google.android.mosey domain=mosey_app type=app_data_file levelFrom=all
 user=_app isPrivApp=true name=com.google.android.rilextension domain=rilextensionservice_app levelFrom=all
+user=_app isPrivApp=true name=com.samsung.slsi.telephony.oemril domain=oemrilservice_app levelFrom=all
+user=_app isPrivApp=true name=com.shannon.imsservice domain=vendor_ims_app levelFrom=all
+user=_app isPrivApp=true name=com.shannon.imsservice:remote domain=vendor_ims_remote_app levelFrom=all
+user=_app isPrivApp=true name=com.shannon.qualifiednetworksservice domain=vendor_qualifiednetworks_app levelFrom=all
 user=_app isPrivApp=true name=com.shannon.rcsservice domain=vendor_rcs_app levelFrom=all
 user=_app isPrivApp=true name=com.shannon.rcsservice:shannonrcsservice domain=vendor_rcs_service_app levelFrom=all
+user=_app isPrivApp=true seinfo=EuiccSupportPixel name=com.google.euiccpixel domain=euiccpixel_app type=app_data_file levelFrom=all
 user=_app isPrivApp=true seinfo=platform name=com.google.android.connectivitymonitor domain=con_monitor_app type=app_data_file levelFrom=all
 user=_app isPrivApp=true seinfo=platform name=com.samsung.slsi.telephony.satelliteservice domain=vendor_satellite_service levelFrom=all
+user=_app isPrivApp=true seinfo=pms name=com.google.android.modem.pms domain=pixel_modem_app levelFrom=all
 user=_app seinfo=platform name=com.android.pixeldisplayservice domain=pixeldisplayservice_app type=app_data_file levelFrom=all
 user=_app seinfo=platform name=com.google.android.connectivitythermalpowermanager domain=connectivity_thermal_power_manager type=app_data_file levelFrom=all
+user=system seinfo=platform name=com.google.SSRestartDetector domain=ssr_detector_app type=system_app_data_file levelFrom=user
 user=system seinfo=platform name=com.google.android.repairmode domain=repair_mode_app type=app_data_file levelFrom=user
 user=system seinfo=platform name=com.google.android.satellite domain=pixelntnservice_app type=app_data_file levelFrom=all

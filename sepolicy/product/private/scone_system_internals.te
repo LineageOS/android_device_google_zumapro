@@ -1,0 +1,8 @@
+type scone_system_internals, coredomain, domain;
+
+app_domain(scone_system_internals)
+
+hal_client_domain(scone_system_internals, hal_power_stats)
+
+allow scone_system_internals activity_service:service_manager find;
+allow scone_system_internals netstats_service:service_manager find;

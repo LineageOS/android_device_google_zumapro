@@ -1,0 +1,14 @@
+type devcoredump_action, domain;
+type devcoredump_action_exec, exec_type, file_type, vendor_file_type;
+type pcie_coredump_data_file, data_file_type, file_type;
+type sysfs_devcoredump, fs_type, sysfs_type;
+
+get_prop(devcoredump_action, vendor_devcoredump_prop)
+
+init_daemon_domain(devcoredump_action)
+
+allow devcoredump_action pcie_coredump_data_file:dir rw_dir_perms;
+allow devcoredump_action pcie_coredump_data_file:file create_file_perms;
+allow devcoredump_action sysfs_devcoredump:dir r_dir_perms;
+allow devcoredump_action sysfs_devcoredump:file rw_file_perms;
+allow devcoredump_action vendor_toolbox_exec:file execute_no_trans;

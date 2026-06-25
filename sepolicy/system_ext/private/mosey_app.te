@@ -1,0 +1,13 @@
+app_domain(mosey_app)
+
+net_domain(mosey_app)
+
+binder_call(mosey_app, mosey_server)
+
+binder_use(mosey_app)
+
+allow mosey_app app_api_service:service_manager find;
+allow mosey_app mosey_service:service_manager find;
+allow mosey_app radio_service:service_manager find;
+
+dontaudit mosey_app fwmarkd_socket:sock_file write;

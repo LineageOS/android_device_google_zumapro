@@ -1,0 +1,5 @@
+type giadiagnose, domain;
+type giadiagnose_exec, exec_type, file_type, vendor_file_type;
+type touch_sim_device, dev_type;
+
+neverallow { domain -giadiagnose } touch_sim_device:chr_file { read write };

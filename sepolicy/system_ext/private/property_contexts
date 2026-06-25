@@ -1,5 +1,9 @@
+persist.device_config.pixel_faceauth. u:object_r:device_config_faceauth_native_prop:s0
+persist.rilext. u:object_r:system_ril_ext_prop:s0
 persist.sys.hdcp_checking u:object_r:usb_control_prop:s0 exact string
+persist.sys.ssr.last_detection_time u:object_r:system_ssrdump_prop:s0 exact uint
 repair_mode.init_completed. u:object_r:repair_mode_init_prop:s0 prefix bool
+rilext. u:object_r:system_ril_ext_prop:s0
 telephony.TnNtn.image_switch u:object_r:telephony_modem_prop:s0 exact enum ntn tn
 telephony.ril.modem_bin_status u:object_r:telephony_modemtype_prop:s0 exact uint
 telephony.ril.ntn_demo_mode u:object_r:telephony_ntn_demo_mode_prop:s0 exact bool
