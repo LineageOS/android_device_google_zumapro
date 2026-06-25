@@ -40,6 +40,9 @@ ro.vendor.gpu.dataspace=1
 # Crypto
 ro.crypto.volume.options=aes-256-xts:aes-256-hctr2
 
+# Dalvik
+dalvik.vm.enable_time_based_gc_trigger=true
+
 # DCK
 ro.gms.dck.se_capability=1
 
@@ -47,6 +50,8 @@ ro.gms.dck.se_capability=1
 debug.hwc.winupdate=1
 debug.slsi_platform=1
 ro.vendor.ddk.set.afbc=1
+ro.vendor.display.enable_screen_context_telemetry.global=false
+ro.vendor.display.enable_screen_context_telemetry.local=false
 vendor.display.0.brightness.dimming.usage?=2
 vendor.display.1.brightness.dimming.usage?=2
 vendor.display.lbe.supported=1
@@ -79,6 +84,13 @@ ro.vendor.gps.pps.enabled=true
 # Graphics
 debug.renderengine.graphite_preview_optin=true
 graphics.gpu.profiler.support=true
+graphics.gpu.profiler.support.gpu_counters.groups=true
+graphics.gpu.profiler.support.gpu_counters.period=true
+graphics.gpu.profiler.support.gpu_counters.zeroes_optimization=true
+graphics.gpu.profiler.support.gpu_counters=true
+graphics.gpu.profiler.support.gpu_frequency=true
+graphics.gpu.profiler.support.render_stages.queue_submit=true
+graphics.gpu.profiler.support.render_stages=true
 ro.egl.blobcache.multifile=true
 ro.egl.blobcache.multifile_limit=33554432
 ro.hardware.egl=mali
@@ -187,6 +199,7 @@ persist.vendor.enable.thermal.genl=true
 
 # USB
 persist.vendor.usb.displayport.enabled=1
+ro.usb.data_protection.disable_when_locked.supported=true
 ro.usb.uvc.enabled=true
 
 # Vibrator
@@ -198,6 +211,9 @@ persist.vendor.vibrator.hal.context.settlingtime=5000
 # Watchdog
 framework_watchdog.fatal_count=3
 framework_watchdog.fatal_window.second=600
+
+# Wi-Fi
+ro.vendor.wifi.manufacturer=broadcom
 
 # ZRAM
 vendor.zram.size?=50p
