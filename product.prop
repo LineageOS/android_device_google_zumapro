@@ -3,8 +3,6 @@ persist.vendor.testing_battery_profile=2
 
 # Bluetooth
 bluetooth.ble.allow_enc_with_bredr=true
-bluetooth.ble.client.subrate_le_audio_mode_max_subrate.config=2
-bluetooth.ble.client.subrate_le_audio_mode_min_subrate.config=2
 bluetooth.core.le_audio.codec_extension_aidl.enabled=true
 bluetooth.device.class_of_device=90,66,12
 bluetooth.hci.timeout_milliseconds=5000
@@ -87,7 +85,6 @@ ro.strongbox.model=Titan-M2
 # Telephony
 persist.radio.multisim.config=dsds
 persist.radio.reboot_on_modem_change=false
-persist.vendor.ril.camp_on_earlier=1
 
 # Thermal
 ro.thermal_warmreset=true

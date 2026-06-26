@@ -117,10 +117,6 @@ ro.oem_unlock_supported=1
 # OMX
 vendor.media.omx=0
 
-# Power
-vendor.powerhal.apf_disabled=false
-vendor.powerhal.apf_enabled=true
-
 # Rescue party
 persist.device_config.configuration.disable_rescue_party=true
 
