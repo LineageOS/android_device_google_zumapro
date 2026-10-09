@@ -30,6 +30,9 @@
     <!-- Indicating if keyboard vibration settings supported or not. -->
     <bool name="config_keyboardVibrationSettingsSupported">true</bool>
 
+    <!-- Indicating if keyboard vibration intensity settings are supported or not. Only valid if config_keyboardVibrationSettingsSupported is true. -->
+    <bool name="config_keyboardVibrationSettingsIntensitySupported">true</bool>
+
     <!-- Indicating if ringtone vibration settings supported or not. -->
     <bool name="config_ringtoneVibrationSettingsSupported">true</bool>
 
