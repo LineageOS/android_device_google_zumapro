@@ -24,6 +24,7 @@ allow grilservice_app hal_radioext_hwservice:hwservice_manager find;
 allow grilservice_app hal_vendor_radio_external_service:service_manager find;
 allow grilservice_app hal_wifi_ext_hwservice:hwservice_manager find;
 allow grilservice_app hal_wifi_ext_service:service_manager find;
+allow grilservice_app radio_service:service_manager find;
 allow grilservice_app radio_vendor_data_file:dir create_dir_perms;
 allow grilservice_app radio_vendor_data_file:file create_file_perms;
 allow grilservice_app sysfs_irq:dir r_dir_perms;

@@ -1,6 +1,5 @@
 type devcoredump_action, domain;
 type devcoredump_action_exec, exec_type, file_type, vendor_file_type;
-type pcie_coredump_data_file, data_file_type, file_type;
 type sysfs_devcoredump, fs_type, sysfs_type;
 
 get_prop(devcoredump_action, vendor_devcoredump_prop)

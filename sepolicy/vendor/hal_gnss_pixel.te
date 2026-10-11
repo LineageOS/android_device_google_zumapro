@@ -13,6 +13,7 @@ init_daemon_domain(hal_gnss_pixel)
 
 allow hal_gnss_pixel fwk_stats_service:service_manager find;
 allow hal_gnss_pixel hal_contexthub_service:service_manager find;
+allow hal_gnss_pixel proc_interrupts:file r_file_perms;
 allow hal_gnss_pixel sscoredump_vendor_data_crashinfo_file:dir r_dir_perms;
 allow hal_gnss_pixel sscoredump_vendor_data_crashinfo_file:file r_file_perms;
 allow hal_gnss_pixel sysfs_gps:file rw_file_perms;

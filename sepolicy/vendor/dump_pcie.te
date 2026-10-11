@@ -2,6 +2,8 @@ pixel_bugreport(dump_pcie)
 
 type pcie_log_device, dev_type;
 
+allow dump_pcie pcie_coredump_data_file:dir r_dir_perms;
+allow dump_pcie pcie_coredump_data_file:file r_file_perms;
 allow dump_pcie pcie_log_device:chr_file r_file_perms;
 allow dump_pcie sysfs:dir r_dir_perms;
 allow dump_pcie sysfs_pcie:file r_file_perms;

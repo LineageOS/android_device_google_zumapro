@@ -1,5 +1,6 @@
 type mosey_server, coredomain, domain, service_manager_type, system_server_service;
 type mosey_server_exec, exec_type, file_type, system_file_type;
+type mosey_service, hal_service_type, service_manager_type;
 
 add_service(mosey_server, mosey_service)
 

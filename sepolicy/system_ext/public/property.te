@@ -5,3 +5,6 @@ system_public_prop(telephony_ril_prop)
 system_restricted_prop(device_config_faceauth_native_prop)
 system_restricted_prop(telephony_modem_prop)
 system_restricted_prop(telephony_ntn_demo_mode_prop)
+
+system_vendor_config_prop(rootdisk_prop)
+system_vendor_config_prop(userdisk_prop)
