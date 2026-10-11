@@ -16,6 +16,7 @@ ro.config.vc_call_vol_steps=7
 vendor.audio_hal.aidl.enable=true
 
 # Battery
+vendor.battery.defender.dwell_v1p5.enable=1
 vendor.battery_mitigation.aidl.enable=true
 
 # Bluetooth
@@ -137,8 +138,6 @@ debug.sf.earlyGl.sf.duration=16600000
 debug.sf.enable_gl_backpressure=1
 debug.sf.enable_sdr_dimming=1
 debug.sf.frame_rate_multiple_threshold=120
-debug.sf.hdcp_negotiation=1
-debug.sf.hdcp_support=1
 debug.sf.late.app.duration=16600000
 debug.sf.late.sf.duration=10500000
 debug.sf.treat_170m_as_sRGB=1
