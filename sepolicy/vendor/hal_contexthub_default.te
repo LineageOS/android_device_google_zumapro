@@ -4,6 +4,7 @@ hal_client_domain(hal_contexthub_default, hal_graphics_allocator)
 hal_server_domain(hal_contexthub_default, hal_bluetooth_lpp)
 
 binder_call(hal_contexthub_default, hal_gnss_pixel)
+binder_call(hal_contexthub_default, hal_light_default)
 binder_call(hal_contexthub_default, hal_sensors_default)
 binder_call(hal_contexthub_default, hal_wifi_ext)
 

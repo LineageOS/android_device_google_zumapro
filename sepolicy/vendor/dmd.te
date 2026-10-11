@@ -1,6 +1,5 @@
 type dmd, domain;
 type dmd_exec, exec_type, file_type, vendor_file_type;
-type modem_diagnostic_app, domain;
 
 add_service(dmd, hal_vendor_modem_logging_service)
 

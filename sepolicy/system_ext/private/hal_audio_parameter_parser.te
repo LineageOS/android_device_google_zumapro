@@ -6,9 +6,6 @@ binder_service(hal_audio_parameter_parser)
 
 add_service(hal_audio_parameter_parser, hal_audio_parameter_parser_service)
 
-binder_call(audioserver, hal_audio_parameter_parser)
 binder_call(hal_audio_parameter_parser, servicemanager)
 
 init_daemon_domain(hal_audio_parameter_parser)
-
-allow audioserver hal_audio_parameter_parser_service:service_manager find;
