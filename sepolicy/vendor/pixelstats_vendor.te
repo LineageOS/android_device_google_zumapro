@@ -7,7 +7,9 @@ binder_call(pixelstats_vendor, stats_service_server)
 binder_use(pixelstats_vendor)
 
 get_prop(pixelstats_vendor, boottime_public_prop)
+get_prop(pixelstats_vendor, rootdisk_prop)
 get_prop(pixelstats_vendor, smart_idle_maint_enabled_prop)
+get_prop(pixelstats_vendor, userdisk_prop)
 get_prop(pixelstats_vendor, vendor_brownout_reason_prop)
 
 init_daemon_domain(pixelstats_vendor)

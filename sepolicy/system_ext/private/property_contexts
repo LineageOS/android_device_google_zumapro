@@ -1,3 +1,5 @@
+dev.mnt.dev.userdata u:object_r:userdisk_prop:s0 exact string
+dev.mnt.rootdisk.root u:object_r:rootdisk_prop:s0 exact string
 persist.device_config.pixel_faceauth. u:object_r:device_config_faceauth_native_prop:s0
 persist.rilext. u:object_r:system_ril_ext_prop:s0
 persist.sys.hdcp_checking u:object_r:usb_control_prop:s0 exact string

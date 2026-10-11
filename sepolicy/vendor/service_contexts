@@ -8,6 +8,7 @@ aocx.IAocx/default u:object_r:aocx:s0
 arm.mali.platform.ICompression/default u:object_r:arm_mali_platform_service:s0
 com.android.server.modemml.ITFLiteService/default u:object_r:modemml_tflite_service:s0
 com.google.android.imageprocessing.hal.IImageProcessingHal/default u:object_r:vendor_image_processing_hal_service:s0
+com.google.android.lyric.intelligentcamerahal.IIntelligentCameraHal/default u:object_r:vendor_intelligent_camera_hal_service:s0
 com.google.edgetpu.IEdgeTpuVendorService/default u:object_r:edgetpu_vendor_service:s0
 com.google.edgetpu.dba.IDevice/default u:object_r:edgetpu_dba_service:s0
 com.google.edgetpu.tachyon.IComputeService/default u:object_r:edgetpu_tachyon_service:s0
@@ -37,7 +38,6 @@ hardware.qorvo.uwb.IUwbVendor/default u:object_r:hal_uwb_vendor_service:s0
 mapper/pixel u:object_r:hal_graphics_mapper_service:s0
 media.ecoservice u:object_r:eco_service:s0
 vendor.goodix.hardware.biometrics.fingerprint.IGoodixFingerprintDaemon/default u:object_r:hal_fingerprint_service:s0
-vendor.google.aam.IAam/default u:object_r:hal_aam_service:s0
 vendor.google.battery_mitigation.IBatteryMitigation/default u:object_r:hal_battery_mitigation_service:s0
 vendor.google.bluetooth_ext.IBTChannelAvoidance/default u:object_r:hal_bluetooth_coexistence_service:s0
 vendor.google.bluetooth_ext.IBluetoothCcc/default u:object_r:hal_bluetooth_coexistence_service:s0
