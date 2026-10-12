@@ -357,6 +357,7 @@ PRODUCT_PACKAGES += \
     EuiccSupportPixelOverlay \
     FrameworkResOverlayProductZumapro \
     FrameworkResOverlayVendorZumapro \
+    GazeOverlay \
     GlanceableHubConfigOverlay \
     GlanceableHubSettingsConfigOverlay \
     GlanceableHubSettingsConfigOverlay2022 \

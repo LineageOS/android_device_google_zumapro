@@ -410,6 +410,9 @@
          auto-brightness. If unset, then it just gets the default sensor of type TYPE_LIGHT. -->
     <string name="config_displayLightSensorType" translatable="false">com.google.sensor.auto_brightness</string>
 
+    <!-- If face auth sends the user directly to home/last open app, or stays on keyguard -->
+    <bool name="config_faceAuthDismissesKeyguard">false</bool>
+
     <!-- The list of packages to automatically opt in to refresh rate suppressing by small area
          detection. Format of this array should be packageName:threshold and threshold value should
          be between 0 to 1-->
